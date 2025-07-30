@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nuclear Energy</title>
+  <link rel="preload" href="logo.png" as="image" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+
+  <style>
+    .dropdown-content a {
+  font-family: 'Inter', sans-serif;
+  display: block;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: normal;
+}
+p {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 20px;
+}
+.line-flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between text and line */
+}
+
+.line-fill-inline {
+  flex-grow: 1;
+  height: 3px; /* slightly thinner */
+  background-color: #59687a; /* updated color */
+  border-radius: 2px;
+}
+    .shape-line {
+      opacity: 0;
+      transition: opacity 2.5s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    @keyframes moveAround {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(-15px, 10px) scale(1.05);
+      }
+      50% {
+        transform: translate(0, 20px) scale(1);
+      }
+      75% {
+        transform: translate(15px, 10px) scale(0.95);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+    .light-blue-box {
+  background-color: rgba(100, 149, 237, 0.015); /* very subtle pale blue */
+  border-radius: 12px;
+  padding: 1.8rem 2.2rem;
+  margin-bottom: 2.5rem;
+
+  /* Border color: lighter blue than background */
+  border: 1px solid rgba(100, 149, 237, 0.06);
+  
+  /* Optional faint shadow for slight depth */
+  box-shadow: 0 4px 12px rgba(100, 149, 237, 0.03);
+}
+
+
+
+.light-blue-box p {
+  margin-bottom: 1.3rem;
+}
+.light-blue-box p:last-child {
+  margin-bottom: 0;
+}
+
+
+    body {
+      background: #ffffff;
+      color: #1e293b;
+      font-family: Georgia, serif;
+      line-height: 1.6;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-size: 20.5px;
+    }
+    .dropdown-button,
+.dropdown-content a {
+  font: georgia, serif;
+}
+
+
+
+    header {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      padding: 2rem;
+      width: 100vw;
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(30, 41, 59, 0.2);
+      border-radius: 14px;
+    }
+
+    .header-decor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 14px;
+    }
+
+    
+
+    .header-decor::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(100, 149, 237, 0.1) 35%,
+        rgba(100, 149, 237, 0.4) 50%,
+        rgba(100, 149, 237, 0.1) 65%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 90% 0;
+      border-radius: inherit;
+    }
+
+    .fade-out {
+  opacity: 1;
+  transition: opacity 0.7s ease-out;
+}
+#nuclearDropdownButton {
+  font-family: 'Inter', sans-serif;; /* same font as dropdown links */
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e293b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center; /* vertical align */
+  gap: 6px;
+  user-select: none;
+  line-height: 1.2;
+}
+#nuclearDropdownArrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+    .shape-line {
+      position: absolute;
+      border: 3px solid rgba(200, 220, 255, 0.5);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15));
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.25);
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes moveScaleYSubtle {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(28px) scale(1.1);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleXSubtleReverse {
+      0% {
+        transform: translateX(0) scale(1);
+      }
+      50% {
+        transform: translateX(-40px) scale(0.9);
+      }
+      100% {
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleDiag {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-27px, 19px) scale(1.12);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleDiagReverse {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(32px, -19px) scale(0.88);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    @keyframes scalePulseCenter {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(12px, -12px) scale(0.85);
+      }
+    }
+
+    .shape-line-1 {
+      width: 140px;
+      height: 140px;
+      top: 50px;
+      left: 20px;
+      animation: moveScaleYSubtle 7.5s infinite;
+    }
+
+    .shape-line-2 {
+      width: 150px;
+      height: 150px;
+      top: 10px;
+      left: 140px;
+      animation: moveScaleXSubtleReverse 8.5s infinite;
+    }
+
+    .shape-line-3 {
+      width: 110px;
+      height: 110px;
+      top: 40px;
+      left: 320px;
+      animation: moveScaleDiagReverse 7.5s infinite;
+    }
+
+    .shape-line-13 {
+      width: 120px;
+      height: 120px;
+      top: 140px;
+      left: 400px;
+      animation: moveScaleYSubtle 7.8s infinite;
+    }
+
+    .shape-line-14 {
+      width: 110px;
+      height: 110px;
+      top: 170px;
+      left: 920px;
+      animation: moveAround 7s infinite ease-in-out;
+      border-color: rgba(200, 220, 255, 0.4);
+    }
+
+    .shape-line-4 {
+      width: 180px;
+      height: 180px;
+      top: 20px;
+      left: 520px;
+      animation: moveScaleDiag 7s infinite;
+    }
+
+    .shape-line-5 {
+      width: 200px;
+      height: 200px;
+      top: 70px;
+      left: 670px;
+      animation: moveScaleYSubtle 6.5s infinite;
+    }
+
+    .shape-line-6 {
+      width: 140px;
+      height: 140px;
+      top: 30px;
+      left: 840px;
+      animation: moveScaleYSubtle 5.8s infinite;
+    }
+
+    .shape-line-7 {
+      width: 180px;
+      height: 180px;
+      top: 90px;
+      left: 1020px;
+      animation: moveScaleDiagReverse 6.8s infinite;
+    }
+
+    .shape-line-8 {
+      width: 150px;
+      height: 150px;
+      top: 15px;
+      left: 1140px;
+      animation: moveScaleYSubtle 7.1s infinite;
+    }
+
+    .shape-line-9 {
+      width: 130px;
+      height: 130px;
+      top: 70px;
+      left: 1280px;
+      animation: moveScaleDiag 5.8s infinite;
+    }
+
+    .shape-line-10 {
+      width: 160px;
+      height: 160px;
+      top: 40px;
+      left: 1380px;
+      animation: moveScaleYSubtle 6.5s infinite;
+    }
+
+    .shape-line-11 {
+      width: 130px;
+      height: 130px;
+      top: 90px;
+      left: 1530px;
+      animation: moveScaleDiagReverse 6s infinite;
+    }
+
+    .shape-line-12 {
+      width: 160px;
+      height: 160px;
+      top: 70px;
+      left: 1670px;
+      animation: scalePulseCenter 6.3s infinite;
+    }
+
+    .shape-line-center {
+      width: 230px;
+      height: 230px;
+      top: 50%;
+      left: 150px;
+      transform: translate(-50%, -50%);
+      animation: scalePulseCenter 6s infinite;
+    }
+
+    .header-logo-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      z-index: 2;
+    }
+
+    .header-logo {
+      width: 280px;
+      border-radius: 14px;
+      z-index: 1;
+    }
+
+    .header-content-wrapper {
+      position: relative;
+      display: inline-block;
+      border-radius: 14px;
+      padding: 1.5rem 2.5rem;
+      max-width: max-content;
+      z-index: 1;
+      min-width: 800px;
+      
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: none;
+    }
+
+    .header-content.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 0 0 0.3rem 0;
+      letter-spacing: -0.03em;
+      border-bottom: 3px solid #94a3b8;
+      padding-bottom: 0.3rem;
+      max-width: max-content;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-style: normal;
+      color: #64748b;
+      margin-top: 0.2rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      background: linear-gradient(90deg, #64748b 0%, #cbd5e1 40%, #64748b 80%);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 10s ease-in-out infinite;
+      text-shadow: 0 0 6px rgba(100, 149, 237, 0.25);
+      opacity: 0.85;
+    }
+
+    nav {
+      background-color: #f1f5f9;
+      width: 100vw;
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding-left: 3rem;
+      box-sizing: border-box;
+      border-radius: 0 0 14px 14px;
+      z-index: 10;
+  
+      
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+  
+    /* sticks to the screen, not the parent */
+    }
+
+    .dropdown-button {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e293b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      text-align: left;
+      user-select: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .dropdown-button:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    .dropdown-content {
+  display: none;
+  font: georgia, serif;
+  position: absolute;
+top: 50px;
+  left: -3rem; /* Changed from -40px to 0 for better alignment with button */
+  width: auto; /* Changed from 100vw to auto */
+  min-width: 300px; /* Added a minimum width */
+  max-width: 350px; /* Set a max-width to prevent it from going edge-to-edge */
+  background-color: #f1f5f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 14px 14px;
+  z-index: 20;
+  padding: 1rem 1.5rem; /* Adjusted padding for better spacing */
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  background-color: rgba(241, 245, 249, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+    .dropdown-content a:hover,
+.dropdown-content a:focus {
+  color: #3b82f6;
+  letter-spacing: 0.5px;
+  transform: translateX(4px);
+  transition: transform 0.3s ease, color 0.3s ease;
+  font: georgia, serif;
+}
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e293b;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font: georgia, serif;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content a:focus {
+      color: #3b82f6;
+      outline: none;
+    
+    }
+
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      flex-grow: 1;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #334155;
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.015em;
+      border-left: 4px solid #94a3b8;
+      padding-left: 1.5rem;
+      width: calc(100vw - 30px);
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: calc(-50vw + 15px);
+      padding-right: 0;
+      box-sizing: border-box;
+    }
+
+    .content-box {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      margin-bottom: 3.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 10px rgba(100, 149, 237, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+
+      width: calc(100vw - 30px);
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: calc(-50vw + 15px);
+      box-sizing: border-box;
+    }
+    .content-box:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 0 14px rgba(100, 149, 237, 0.2);
+}
+
+    .content-box p {
+      margin-bottom: 1.5rem;
+      
+}
+
+    
+
+    .content-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      background-color: #1e293b;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+    .header-title {
+      font-family: 'Inter', sans-serif;
+    }
+    .shimmer-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      background: linear-gradient(90deg, #bbbbbb 25%, #ffffff 50%, #bbbbbb 75%);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 6.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    .header-sans {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-decor" aria-hidden="true">
+      <div class="shape-line shape-line-1"></div>
+      <div class="shape-line shape-line-2"></div>
+      <div class="shape-line shape-line-3"></div>
+      <div class="shape-line shape-line-13"></div>
+      <div class="shape-line shape-line-14"></div>
+      <div class="shape-line shape-line-4"></div>
+      <div class="shape-line shape-line-5"></div>
+      <div class="shape-line shape-line-6"></div>
+      <div class="shape-line shape-line-7"></div>
+      <div class="shape-line shape-line-8"></div>
+      <div class="shape-line shape-line-9"></div>
+      <div class="shape-line shape-line-10"></div>
+      <div class="shape-line shape-line-11"></div>
+      <div class="shape-line shape-line-12"></div>
+      <div class="shape-line shape-line-center"></div>
+    </div>
+
+    <div class="header-content-wrapper">
+      <div class="header-content" id="header-content">
+        <span class="header-logo-wrapper">
+          <img src="logo.png" alt="NewClear Logo" class="header-logo" />
+        </span>
+        <div>
+          <div class="header-title">
+            <h1>Nuclear Energy</h1>
+            <p class="subtitle shimmer-text">Powering the Future of Humanity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<nav>
+  <div class="dropdown" id="mainDropdown">
+    <button id="mainDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button">
+      Menu
+    </button>
+    <div class="dropdown-content" id="mainDropdownContent" role="menu" aria-label="Primary Navigation" style="display:none;">
+        <a href="index.html" role="menuitem" tabindex="0">Home</a>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+        <!-- Nuclear Energy dropdown -->
+        <div class="dropdown nested-dropdown" style="position: relative;">
+          <button id="nuclearDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button"
+            style="display: flex; align-items: center; gap: 6px; padding: 0; height: 2.5rem; line-height: 2.5rem;">
+            <span id="nuclearDropdownArrow">▶</span> Nuclear Energy
+          </button>
+          <div id="nuclearDropdownContent" role="menu" aria-label="Nuclear Energy Submenu"
+            style="display:none; margin-left: -25px; margin-top: 0.3rem; padding-left: 1.3em;">
+            <a href="WINE2.html" role="menuitem" tabindex="0">What is Nuclear Energy?</a>
+            <a href="TMWOFCNE.html" role="menuitem" tabindex="0">Main Ways of Creating Nuclear Energy</a>
+            <a href="TOWOCNE.html" role="menuitem" tabindex="0">Other Ways of Creating Nuclear Energy</a>
+            <a href="ETOE.html" role="menuitem" tabindex="0">Experimental Ways of Creating Nuclear Energy</a>
+          </div>
+        </div>
+
+        <!-- Nuclear Reactors dropdown -->
+        <div class="dropdown nested-dropdown" style="position: relative;">
+          <button id="reactorDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button"
+            style="display: flex; align-items: center; gap: 1px; padding: 0; height: 2.5rem; line-height: 2.5rem;">
+            <span id="reactorDropdownArrow">▶</span> Nuclear Reactors
+          </button>
+          <div id="reactorDropdownContent" role="menu" aria-label="Nuclear Reactors Submenu"
+            style="display:none; margin-left: -25px; margin-top: 0.3rem; padding-left: 1.3em;">
+             <a href="HDARW.html" role="menuitem" tabindex="0">How Does a Nuclear Reactor Work?</a>
+            <a href="#" role="menuitem" tabindex="0">Fusion Reactors</a>
+            <a href="#" role="menuitem" tabindex="0">Breeder Reactors</a>
+            <a href="#" role="menuitem" tabindex="0">Experimental Reactors</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+    
+    </div>
+
+    </div>
+  </div>
+</nav>
+  <main id="fade-in-content" style="opacity: 0; transition: opacity 2s ease;">
+    
+      <div class="header-line fadeable">
+        <h2 class="header-sans line-flex">
+  Muon-catalyzed fusion
+  <span class="line-fill-inline"></span>
+</h2>
+      </div>
+      <div class="content-box fadeable">
+        <div class="light-blue-box fadeable">
+      <p class="fadeable">Muon-catalyzed fusion is a remarkable and unusual form of nuclear fusion that exploits the unique properties of a subatomic particle known as the muon. Muons belong to the same family of particles as electrons, but they are much heavier (about 207 times the mass of an electron). This significant difference in mass allows muons to orbit much closer to the nucleus of an atom compared to electrons, dramatically changing the way atoms behave when muons replace electrons. In particular, when muons replace electrons in hydrogen isotopes such as deuterium and tritium, they form exotic muonic molecules. These muonic molecules have atomic nuclei pulled extremely close together due to the muon’s tight orbit. Normally, the positively charged nuclei repel each other because of the electromagnetic force, preventing fusion unless enormous temperatures and pressures push the nuclei close enough. However, the muon’s ability to shrink the space between nuclei by orbiting so tightly reduces this repulsion drastically. This allows the strong nuclear force, which acts only at very short distances, to dominate and cause the nuclei to fuse.</p>
+        <p class="fadeable">The process of muon-catalyzed fusion begins by introducing muons into a dense mixture of hydrogen isotopes, typically deuterium and tritium, often in a liquid or gaseous state to facilitate close interactions. When a muon replaces an electron in one of the hydrogen molecules, it creates what is called a muonic molecule. Because the muon is so much heavier than an electron, its orbital radius is roughly 200 times smaller, which drastically reduces the distance between the two positively charged nuclei in the molecule. This reduction is critical because in normal hydrogen molecules, the nuclei are kept at a distance by the electrons, and the repulsive electromagnetic force between the positively charged nuclei is too strong for fusion to occur under standard conditions. The muon’s presence allows the nuclei to approach each other close enough for the strong nuclear force to overcome the repulsion and fuse them together. The fusion reaction between deuterium and tritium produces a helium nucleus (alpha particle), a neutron, and releases a large amount of energy. The energy comes from the difference in mass between the reactants and products, which is converted into kinetic energy according to Einstein’s mass-energy equivalence principle (E=mc<sup>2</sup>). Despite the conceptual simplicity, the underlying physics involves complex quantum mechanical processes, and much research focuses on understanding these interactions and optimizing conditions to maximize the fusion rate.</p>
+      <p class="fadeable">After the fusion reaction occurs, the muon is often released and can go on to catalyze further fusion reactions. Since muons are unstable particles with a lifespan of approximately 2.2 microseconds, the number of fusion events each muon can catalyze is limited by this short lifetime. Ideally, a single muon could trigger dozens or even hundreds of fusion reactions during its existence, multiplying the energy output from one particle. However, several significant challenges hinder the practical use of muon-catalyzed fusion as a viable energy source. One of the main obstacles is the so-called “muon sticking” problem, where the muon binds to the helium nucleus produced in the fusion reaction. When this happens, the muon can no longer catalyze additional fusion events, reducing the overall number of reactions per muon and thus the efficiency of the process. Another critical limitation is the energy cost of producing muons themselves. Currently, muons are generated using high-energy particle accelerators, which require much more energy than the fusion reactions catalyzed by the muons can produce. This energy imbalance means that, at present, muon-catalyzed fusion does not yield a net positive energy output.</p>
+    <!-- Dropdown container -->
+<div style="width: 100%; margin-top: 16px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <button id="muonDropdownToggle" aria-expanded="false" aria-controls="muonDropdownContent"
+    style="
+    background: none;
+  border: none;
+  color: black;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  "
+  aria-expanded="false">
+    ▶ Show Muon-Catalyzed Fusion Model 
+  </button>
+
+  <div id="muonDropdownContent" style="display:none; width: 100%; padding: 12px; box-sizing: border-box; background: transparent; border-top: 1px solid #ddd;">
+    <div id="muonFusionContainer" style="width: 100%; max-width: 100%; display: flex; flex-direction: column; align-items: center; padding: 10px; height: 100%; justify-content: center; position: relative;">
+      <div id="muonFusionScene" style="width: 100%; max-width: 600px; height: 600px; perspective: 1200px; background: transparent; box-sizing: border-box; overflow: visible; margin: 0 auto;"></div>
+      <div id="muonFusionDescription" style="max-width: 600px; margin: 8px auto 4px; font-size: 1rem; text-align: center; min-height: 30px; line-height: 1.3;"></div>
+      <div id="muonFusionControls" style="max-width: 600px; margin: 10px auto 0; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
+        <button id="muonPrevBtn" disabled style="flex: none;">←</button>
+        <button id="muonNextBtn" style="flex: none;">→</button>
+        <button id="muonResetBtn" style="flex: none;">⟲</button>
+      </div>
+    </div>
+
+    <style>
+      .muonFusionNode {
+        position: absolute;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent 80%),
+          radial-gradient(circle at 50% 65%, var(--color-base) 50%, var(--color-dark) 95%);
+        box-shadow:
+          inset 0 30px 30px rgba(255,255,255,0.6),
+          inset 0 -15px 30px rgba(0,0,0,0.3);
+        transition: box-shadow 0.3s ease;
+      }
+      .muonFusionLabel {
+        position: absolute;
+        font-weight: bold;
+        text-shadow: 0 0 6px rgba(255,255,255,0.9);
+        font-size: 14px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      #muonFusionControls button {
+        background-color: #4a90e2;
+        border: none;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+      }
+      #muonFusionControls button:disabled {
+        background-color: #aaa;
+        cursor: default;
+      }
+      #muonFusionExplosion {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 0, 0, 0.6);
+        pointer-events: none;
+        z-index: 3;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+      }
+      .muonFusionParticle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 215, 0, 0.9);
+        pointer-events: none;
+        opacity: 0;
+        will-change: transform, opacity;
+        z-index: 4;
+      }
+      @keyframes explodePulse {
+        0% { opacity: 0.8; width: 0; height: 0; }
+        50% { opacity: 0.3; width: 120px; height: 120px; }
+        100% { opacity: 0; width: 150px; height: 150px; }
+      }
+      .fusionHighlight {
+        box-shadow:
+          0 0 20px 8px rgba(255, 69, 0, 0.7),
+          inset 0 30px 30px rgba(255, 140, 0, 0.9);
+        transition: box-shadow 0.5s ease;
+      }
+    </style>
+
+    <script>
+      (() => {
+        const muonScene = document.getElementById('muonFusionScene');
+        const muonDescription = document.getElementById('muonFusionDescription');
+        const muonPrevBtn = document.getElementById('muonPrevBtn');
+        const muonNextBtn = document.getElementById('muonNextBtn');
+        const muonResetBtn = document.getElementById('muonResetBtn');
+
+        const muonExplosion = document.createElement('div');
+        muonExplosion.id = 'muonFusionExplosion';
+        muonScene.appendChild(muonExplosion);
+
+        class MuonFusionSphere {
+          constructor(name, baseColor, darkColor, size, label) {
+            this.el = document.createElement('div');
+            this.el.classList.add('muonFusionNode');
+            this.labelEl = document.createElement('div');
+            this.labelEl.classList.add('muonFusionLabel');
+            this.labelEl.innerText = label;
+            muonScene.appendChild(this.el);
+            muonScene.appendChild(this.labelEl);
+            this.name = name;
+            this.size = size;
+            this.pos = {x: 0, y: 0, z: 0};
+            this.scale = 1;
+            this.visible = true;
+            this.el.style.setProperty('--color-base', baseColor);
+            this.el.style.setProperty('--color-dark', darkColor);
+            this.el.style.width = size + 'px';
+            this.el.style.height = size + 'px';
+          }
+          setPosition(x, y, z) {
+            this.pos = {x, y, z};
+            this.update();
+          }
+          setScale(s) {
+            this.scale = s;
+            this.update();
+          }
+          update() {
+            if (!this.visible) {
+              this.el.style.display = 'none';
+              this.labelEl.style.display = 'none';
+              return;
+            }
+            const size = this.size * this.scale;
+            this.el.style.display = 'block';
+            this.labelEl.style.display = 'block';
+            this.el.style.width = size + 'px';
+            this.el.style.height = size + 'px';
+            this.el.style.transform = `translate3d(${this.pos.x - size/2}px, ${this.pos.y - size/2}px, ${this.pos.z}px) scale(${this.scale})`;
+            this.labelEl.style.transform = `translate3d(${this.pos.x}px, ${this.pos.y + size/2 + 20}px, ${this.pos.z}px)`;
+          }
+          hide() { this.visible = false; this.update(); }
+          show() { this.visible = true; this.update(); }
+          highlightFusion(active) {
+            if(active) {
+              this.el.classList.add('fusionHighlight');
+            } else {
+              this.el.classList.remove('fusionHighlight');
+            }
+          }
+        }
+
+        class MuonFusionParticle {
+          constructor() {
+            this.el = document.createElement('div');
+            this.el.classList.add('muonFusionParticle');
+            muonScene.appendChild(this.el);
+            this.reset();
+          }
+          reset() {
+            this.x = 0;
+            this.y = 0;
+            this.vx = (Math.random() - 0.5) * 2.5;
+            this.vy = (Math.random() - 0.5) * 2.5;
+            this.life = 60 + Math.random() * 40;
+            this.age = 0;
+            this.opacity = 1;
+            this.visible = false;
+            this.update();
+          }
+          emit(x, y) {
+            this.x = x;
+            this.y = y;
+            this.age = 0;
+            this.opacity = 1;
+            this.visible = true;
+            this.update();
+          }
+          update() {
+            if (!this.visible) {
+              this.el.style.opacity = 0;
+              return;
+            }
+            this.el.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+            this.el.style.opacity = this.opacity;
+          }
+          step() {
+            if (!this.visible) return;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.age++;
+            this.opacity = 1 - this.age / this.life;
+            if (this.age >= this.life) {
+              this.reset();
+            } else {
+              this.update();
+            }
+          }
+        }
+
+        const centerX = 300;
+        const centerY = 300;
+
+        const d = new MuonFusionSphere('d', '#2196f3', '#0d47a1', 80, 'Deuterium');
+        const t = new MuonFusionSphere('t', '#00bcd4', '#006064', 90, 'Tritium');
+        const mu = new MuonFusionSphere('mu', '#9c27b0', '#4a148c', 30, 'Muon');
+        const mol = new MuonFusionSphere('mol', '#673ab7', '#311b92', 100, 'Muonic Molecule');
+        const alpha = new MuonFusionSphere('alpha', '#ff5722', '#bf360c', 80, 'Alpha Particle');
+        const n = new MuonFusionSphere('n', '#607d8b', '#263238', 60, 'Neutron');
+
+        const muonBalls = { d, t, mu, mol, alpha, n };
+
+        const particles = [];
+        for(let i = 0; i < 20; i++) particles.push(new MuonFusionParticle());
+
+        const muonSteps = [
+          { d: [centerX - 100, centerY, 1], t: [centerX + 100, centerY, 1], mu: [centerX, centerY - 150, 1], mol: null, alpha: null, n: null },
+          { d: null, t: null, mu: null, mol: [centerX, centerY, 1.1], alpha: null, n: null },
+          { d: null, t: null, mu: null, mol: [centerX, centerY, 1.2], alpha: null, n: null },
+          { d: null, t: null, mu: null, mol: null, alpha: [centerX - 60, centerY, 1.05], n: [centerX + 60, centerY, 1.05] },
+          { d: null, t: null, mu: [centerX, centerY - 150, 0.8], mol: null, alpha: [centerX - 60, centerY, 0.9], n: [centerX + 60, centerY, 0.9] }
+        ];
+
+        const muonTexts = [
+          "Step 1: Deuterium, tritium, and a muon are introduced.",
+          "Step 2: The muon replaces an electron, forming a tightly bound muonic molecule between the nuclei.",
+          "Step 3: The muon’s presence drastically reduces the distance between deuterium and tritium nuclei, allowing them to overcome electrostatic repulsion and undergo fusion.",
+          "Step 4: Fusion occurs and a alpha particle and neutron are released with significant energy.",
+          "Step 5: The muon may continue catalyzing fusion reactions or stick to the newly formed alpha particle, creating a stable muonic molecule."
+        ];
+
+        let muonState = 0;
+        let muonExploding = false;
+
+        function updateMuonUI() {
+          muonDescription.innerText = muonTexts[muonState];
+          muonPrevBtn.disabled = muonState === 0;
+          muonNextBtn.disabled = muonState === muonSteps.length - 1;
+        }
+
+        muonPrevBtn.onclick = () => {
+          if (muonState > 0) muonState--;
+          updateMuonUI();
+        };
+
+        muonNextBtn.onclick = () => {
+          if (muonState < muonSteps.length - 1) muonState++;
+          updateMuonUI();
+        };
+
+        muonResetBtn.onclick = () => {
+          muonState = 0;
+          updateMuonUI();
+        };
+
+        const current = {};
+        for (const key in muonBalls) current[key] = { x: centerX, y: centerY, z: 0, s: 1 };
+
+        function lerp(start, end, amt) {
+          return start + (end - start) * amt;
+        }
+
+        function triggerMuonExplosion(x, y) {
+          if (muonExploding) return;
+          muonExploding = true;
+          muonExplosion.style.left = x + 'px';
+          muonExplosion.style.top = y + 'px';
+          muonExplosion.style.opacity = '0.8';
+          muonExplosion.style.animation = 'explodePulse 1s ease-out forwards';
+          muonExplosion.addEventListener('animationend', () => {
+            muonExplosion.style.opacity = '0';
+            muonExplosion.style.animation = '';
+            muonExploding = false;
+          }, {once: true});
+        }
+
+        function animateMuon() {
+          const t = 0.1;
+          const target = muonSteps[muonState];
+
+          for (const name in muonBalls) {
+            const ball = muonBalls[name];
+            const tgt = target[name];
+            if (!tgt) {
+              ball.hide();
+              ball.highlightFusion(false);
+              continue;
+            }
+            const pos = current[name];
+            pos.x = lerp(pos.x, tgt[0], t);
+            pos.y = lerp(pos.y, tgt[1], t);
+            pos.s = lerp(pos.s, tgt[2] || 1, t);
+            ball.show();
+            ball.setPosition(pos.x, pos.y, 0);
+            ball.setScale(pos.s);
+
+            if (muonState === 2 && name === 'mol') {
+              ball.highlightFusion(true);
+            } else {
+              ball.highlightFusion(false);
+            }
+          }
+
+          if (muonState === 3) {
+            triggerMuonExplosion(centerX, centerY);
+            particles.forEach(p => {
+              if (!p.visible) p.emit(centerX, centerY);
+              p.step();
+            });
+          } else {
+            particles.forEach(p => { p.visible = false; p.update(); });
+          }
+
+          requestAnimationFrame(animateMuon);
+        }
+
+        updateMuonUI();
+        animateMuon();
+
+        // Dropdown toggle logic
+        
+  
+  const toggleBtn = document.getElementById('muonDropdownToggle');
+  const dropdownContent = document.getElementById('muonDropdownContent');
+
+  toggleBtn.addEventListener('click', () => {
+    const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    toggleBtn.setAttribute('aria-expanded', !expanded);
+
+    const arrow = expanded ? '▶' : '▼';
+    const label = expanded ? 'Show' : 'Hide';
+    toggleBtn.textContent = `${arrow} ${label} Muon-Catalyzed Fusion Model`;
+
+    dropdownContent.style.display = expanded ? 'none' : 'block';
+  });
+
+
+
+
+      })();
+    </script>
+  </div>
+</div>
+
+    </div>
+      </div>
+        <h2 class="header-sans line-flex">
+Spallation
+  <span class="line-fill-inline"></span>
+</h2>
+
+      <div class="content-box fadeable">
+        <div class="light-blue-box">
+      <p class="fadeable">Nuclear spallation is a powerful and highly energetic process in which a fast-moving particle such as a high energy proton collides directly with a large and heavy atomic nucleus like lead, tungsten, or uranium. When this proton strikes the nucleus with extremely high velocity and energy, typically above one hundred million electron volts, the nucleus becomes violently unstable and structurally disrupted. The energy from the collision is absorbed into the nucleus almost instantly, overwhelming the forces that normally hold it together. Instead of splitting into two large pieces as seen in nuclear fission, the nucleus disintegrates in a more chaotic and asymmetric manner. It rapidly ejects a large number of smaller subatomic particles, including neutrons, protons, and small atomic clusters such as helium and hydrogen isotopes. These fragments shoot out in various directions with very high speeds, each carrying away part of the energy from the original impact. The remaining core of the original atom is left as a lighter and different nucleus, often in the form of a different element or isotope. This reaction can release twenty to forty or even more neutrons from a single event, making it one of the most neutron-rich reactions in nuclear science. Because spallation does not rely on a chain reaction and does not require the conditions for criticality, it is inherently more stable and safer in certain applications, especially where precise neutron control is needed for scientific or industrial purposes.</p>
+    <p class="fadeable">The entire spallation process unfolds in two main stages, both of which occur extremely rapidly but involve very different internal dynamics within the atomic nucleus. The first stage is known as the cascade phase. In this phase, the incoming proton does not merely collide with the outer layer of the nucleus but penetrates deeply and begins interacting directly with the nucleons inside, which are the individual protons and neutrons. These internal collisions set off a chain of secondary impacts, in which each struck nucleon may go on to hit other nucleons, creating a dense and chaotic storm of interactions. This cascade leads to the sudden and violent ejection of many fast-moving particles from the nucleus within just a few trillionths of a second. Following this is the evaporation phase, where the remaining nucleus, now highly excited and unstable from all the internal disruptions, cools down more gradually by shedding additional particles. Most of these late-stage emissions are low energy neutrons, which are released in a less explosive manner compared to the earlier phase. This cooling-down phase stabilizes the nucleus and completes the reaction. The sequence of these two stages results in a mix of fast and slow neutrons, which makes spallation ideal for applications where different neutron energies or time scales are important. This unique two-part nature sets it apart from other nuclear reactions and gives it wide versatility in advanced nuclear systems and experimental research. </p>
+    
+<div style="width: 100%; text-align: left; margin-bottom: 20px;">
+  <button id="toggleBtn"
+    onclick="toggleSpallationModel()"
+    style="background: none; border: none; color: black; font-family: inherit; font-size: inherit; padding: 0; cursor: pointer; outline: none; display: inline-flex; align-items: center; gap: 6px;"
+    aria-expanded="false">
+    <span id="toggleArrow">▶</span>
+    <span id="toggleText">Show Spallation Model</span>
+  </button>
+  </div>
+  <div id="spallationModelContainer" style="display: none; margin-top: 20px;">
+
+    <!-- MODEL START -->
+    <div id="container">
+      <div id="scene"></div>
+      <div id="description">Step 1: The nucleus is calm and compact.</div>
+      <div id="controls">
+        <button id="prevBtn" disabled>←</button>
+        <button id="nextBtn">→</button>
+        <button id="resetBtn">⟲</button>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <style>
+      html, body {
+        background: #fff;
+        color: #222;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        max-width: 100%;
+        justify-content: center;
+        position: relative;
+      }
+      #scene {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        perspective: 1200px;
+        background: transparent;
+        box-sizing: border-box;
+        overflow: visible;
+      }
+      .sphere {
+        position: absolute;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), transparent 80%),
+          radial-gradient(circle at 50% 65%, var(--color-base) 50%, var(--color-dark) 95%);
+        box-shadow:
+          inset 0 20px 20px rgba(255,255,255,0.6),
+          inset 0 -10px 15px rgba(0,0,0,0.25);
+        transition: transform 0.3s ease, opacity 0.5s ease;
+        pointer-events: none;
+      }
+      .label {
+        position: absolute;
+        font-weight: 700;
+        text-shadow: 0 0 5px rgba(255,255,255,0.8);
+        font-size: 14px;
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      #description {
+        max-width: 600px;
+        margin: 8px 0 4px;
+        font-size: 1rem;
+        text-align: center;
+        min-height: 40px;
+        line-height: 1.3;
+      }
+      #controls {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 10px 0 0;
+      }
+      button {
+        background-color: #4a90e2;
+        border: none;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+      }
+      button:disabled {
+        background-color: #aaa;
+        cursor: default;
+      }
+    </style>
+
+    <script>
+      function toggleSpallationModel() {
+        const container = document.getElementById("spallationModelContainer");
+        const btnArrow = document.getElementById("toggleArrow");
+        const btnText = document.getElementById("toggleText");
+        if (container.style.display === "none") {
+          container.style.display = "block";
+          btnArrow.textContent = "▼";
+          btnText.textContent = "Hide Spallation Model";
+        } else {
+          container.style.display = "none";
+          btnArrow.textContent = "▶";
+          btnText.textContent = "Show Spallation Model";
+        }
+      }
+
+      const scene = document.getElementById('scene');
+      const description = document.getElementById('description');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      class Sphere3D {
+        constructor(name, baseColor, darkColor, size) {
+          this.name = name;
+          this.size = size;
+          this.pos = { x: 0, y: 0 };
+          this.scale = 1;
+          this.opacity = 1;
+          this.visible = true;
+
+          this.el = document.createElement('div');
+          this.el.classList.add('sphere');
+          this.el.style.setProperty('--color-base', baseColor);
+          this.el.style.setProperty('--color-dark', darkColor);
+          this.el.style.width = size + 'px';
+          this.el.style.height = size + 'px';
+
+          scene.appendChild(this.el);
+
+          this.labelEl = document.createElement('div');
+          this.labelEl.classList.add('label');
+          scene.appendChild(this.labelEl);
+
+          this.update();
+        }
+        setPosition(x, y) {
+          this.pos = { x, y };
+          this.update();
+        }
+        setScale(s) {
+          this.scale = s;
+          this.update();
+        }
+        setOpacity(o) {
+          this.opacity = o;
+          this.el.style.opacity = o;
+          this.labelEl.style.opacity = o;
+        }
+        setLabelText(text) {
+          this.labelEl.innerText = text;
+        }
+        update() {
+          if (!this.visible) {
+            this.el.style.display = 'none';
+            this.labelEl.style.display = 'none';
+            return;
+          }
+          const size = this.size * this.scale;
+          this.el.style.display = 'block';
+          this.labelEl.style.display = 'block';
+
+          this.el.style.width = size + 'px';
+          this.el.style.height = size + 'px';
+          this.el.style.transform = `translate3d(${this.pos.x - size / 2}px, ${this.pos.y - size / 2}px, 0) scale(${this.scale})`;
+          this.el.style.opacity = this.opacity;
+
+          const labelX = this.pos.x;
+          const labelY = this.pos.y + size / 2 + 18;
+          this.labelEl.style.transform = `translate3d(${labelX}px, ${labelY}px, 0)`;
+          this.labelEl.style.opacity = this.opacity;
+        }
+        hide() {
+          this.visible = false;
+          this.update();
+        }
+        show() {
+          this.visible = true;
+          this.update();
+        }
+      }
+
+      const centerX = 300;
+      const centerY = 300;
+
+      const nucleus = new Sphere3D('nucleus', '#d32f2f', '#7b0000', 120);
+      nucleus.setLabelText('Heavy Nucleus (Protons & Neutrons)');
+
+      const incomingNeutron = new Sphere3D('incomingNeutron', '#1976d2', '#003c8f', 60);
+      incomingNeutron.setLabelText('Incoming Neutron');
+
+      const ejecta = [
+        new Sphere3D('eject1', '#fbc02d', '#b28704', 40),
+        new Sphere3D('eject2', '#fbc02d', '#b28704', 40),
+        new Sphere3D('eject3', '#fbc02d', '#b28704', 40),
+      ];
+      ejecta.forEach((eject, i) => eject.setLabelText('Neutron'));
+
+      let positions = {
+        nucleus: { x: centerX, y: centerY, s: 1, o: 1 },
+        incomingNeutron: { x: centerX - 300, y: centerY, s: 1, o: 1 },
+        eject1: { x: centerX, y: centerY, s: 0, o: 0 },
+        eject2: { x: centerX, y: centerY, s: 0, o: 0 },
+        eject3: { x: centerX, y: centerY, s: 0, o: 0 },
+      };
+
+      let state = 0;
+
+      const steps = [
+        {
+          desc: 'Step 1: The nucleus is calm and compact.',
+          targets: {
+            incomingNeutron: { x: centerX - 300, y: centerY, s: 1, o: 1 },
+            nucleus: { x: centerX, y: centerY, s: 1, o: 1 },
+            eject1: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject2: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject3: { x: centerX, y: centerY, s: 0, o: 0 },
+          },
+          ejectLabelsVisible: false,
+          neutronLabelVisible: true
+        },
+        {
+          desc: 'Step 2: Incoming neutron moves closer to the nucleus.',
+          targets: {
+            incomingNeutron: { x: centerX - 140, y: centerY + 20, s: 1, o: 1 },
+            nucleus: { x: centerX, y: centerY, s: 1, o: 1 },
+            eject1: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject2: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject3: { x: centerX, y: centerY, s: 0, o: 0 },
+          },
+          ejectLabelsVisible: false,
+          neutronLabelVisible: true
+        },
+        {
+          desc: 'Step 3: Impact! Incoming neutron enters the nucleus and disappears.',
+          targets: {
+            incomingNeutron: { x: centerX, y: centerY, s: 0.7, o: 1 },
+            nucleus: { x: centerX, y: centerY, s: 1.1, o: 1 },
+            eject1: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject2: { x: centerX, y: centerY, s: 0, o: 0 },
+            eject3: { x: centerX, y: centerY, s: 0, o: 0 },
+          },
+          ejectLabelsVisible: false,
+          neutronLabelVisible: true
+        },
+        {
+          desc: 'Step 4: The neutron disappears fully, and ejecta neutrons eject outward.',
+          targets: {
+            incomingNeutron: { x: centerX, y: centerY, s: 0, o: 0 },
+            nucleus: { x: centerX, y: centerY, s: 0.8, o: 1 },
+            eject1: { x: centerX + 200, y: centerY - 120, s: 1, o: 1 },
+            eject2: { x: centerX + 220, y: centerY + 100, s: 1, o: 1 },
+            eject3: { x: centerX + 260, y: centerY + 160, s: 1, o: 1 },
+          },
+          ejectLabelsVisible: true,
+          neutronLabelVisible: false
+        },
+        {
+          desc: 'Step 5: The nucleus is lighter after losing neutrons through spallation.',
+          targets: {
+            incomingNeutron: { x: centerX - 300, y: centerY, s: 0, o: 0 },
+            nucleus: { x: centerX, y: centerY, s: 0.7, o: 1 },
+            eject1: { x: centerX + 300, y: centerY - 150, s: 0, o: 0 },
+            eject2: { x: centerX + 300, y: centerY + 150, s: 0, o: 0 },
+            eject3: { x: centerX + 350, y: centerY + 200, s: 0, o: 0 },
+          },
+          ejectLabelsVisible: false,
+          neutronLabelVisible: false
+        }
+      ];
+
+      function lerp(start, end, t) {
+        return start + (end - start) * t;
+      }
+
+      function animate() {
+        const t = 0.1;
+        const step = steps[state];
+        const targets = step.targets;
+
+        for (const key in positions) {
+          positions[key].x = lerp(positions[key].x, targets[key].x, t);
+          positions[key].y = lerp(positions[key].y, targets[key].y, t);
+          positions[key].s = lerp(positions[key].s, targets[key].s, t);
+          positions[key].o = lerp(positions[key].o, targets[key].o, t);
+        }
+
+        nucleus.setPosition(positions.nucleus.x, positions.nucleus.y);
+        nucleus.setScale(positions.nucleus.s);
+        nucleus.setOpacity(positions.nucleus.o);
+        nucleus.show();
+
+        incomingNeutron.setPosition(positions.incomingNeutron.x, positions.incomingNeutron.y);
+        incomingNeutron.setScale(positions.incomingNeutron.s);
+        incomingNeutron.setOpacity(positions.incomingNeutron.o);
+        if (positions.incomingNeutron.s < 0.05 || positions.incomingNeutron.o < 0.05) {
+          incomingNeutron.hide();
+        } else {
+          incomingNeutron.show();
+        }
+
+        ejecta.forEach((eject, i) => {
+          const key = 'eject' + (i + 1);
+          eject.setPosition(positions[key].x, positions[key].y);
+          eject.setScale(positions[key].s);
+          eject.setOpacity(positions[key].o);
+          if (positions[key].s < 0.05 || positions[key].o < 0.05) {
+            eject.hide();
+          } else {
+            eject.show();
+          }
+        });
+
+        if (step.neutronLabelVisible) {
+          const dx = positions.incomingNeutron.x - positions.nucleus.x;
+          const dy = positions.incomingNeutron.y - positions.nucleus.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const nucleusRadius = 120 * positions.nucleus.s / 2;
+          const neutronRadius = 60 * positions.incomingNeutron.s / 2;
+
+          if (dist < nucleusRadius - neutronRadius) {
+            let fade = dist / (nucleusRadius - neutronRadius);
+            incomingNeutron.labelEl.style.opacity = fade;
+          } else {
+            incomingNeutron.labelEl.style.opacity = 1;
+          }
+          incomingNeutron.labelEl.style.display = 'block';
+        } else {
+          incomingNeutron.labelEl.style.opacity = 0;
+          incomingNeutron.labelEl.style.display = 'none';
+        }
+
+        ejecta.forEach(eject => {
+          eject.labelEl.style.opacity = step.ejectLabelsVisible ? '1' : '0';
+          eject.labelEl.style.display = step.ejectLabelsVisible ? 'block' : 'none';
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      function updateUI() {
+        description.innerText = steps[state].desc;
+        prevBtn.disabled = state === 0;
+        nextBtn.disabled = state === steps.length - 1;
+      }
+
+      prevBtn.onclick = () => {
+        if (state > 0) {
+          state--;
+          updateUI();
+        }
+      };
+
+      nextBtn.onclick = () => {
+        if (state < steps.length - 1) {
+          state++;
+          updateUI();
+        }
+      };
+
+      resetBtn.onclick = () => {
+        state = 0;
+        updateUI();
+      };
+
+      updateUI();
+      animate();
+    </script>
+    </div>
+        
+    <h2 class="header-sans line-flex">
+  Aneutronic Fusion 
+  <span class="line-fill-inline"></span>
+</h2>
+
+    
+      <div class="content-box fadeable">
+        <div class="light-blue-box">
+    <p class="fadeable">Aneutronic fusion is a highly advanced and theoretical form of nuclear fusion that seeks to generate energy through reactions that produce virtually no neutrons. In standard fusion reactions such as those involving deuterium and tritium, which are the most studied and used in experimental reactors today a large portion of the fusion energy is released in the form of high-energy neutrons. These neutrons pose serious problems: they damage reactor materials over time, make the reactor itself radioactive, and require extensive shielding to protect surrounding environments and personnel. They also prevent direct electricity generation, because neutrons cannot be easily manipulated or harvested by electromagnetic fields. In contrast, aneutronic fusion relies on fuel reactions that emit primarily charged particles (usually protons or alpha particles (helium nuclei))that can be captured and converted into electricity more directly and safely. By eliminating the neutron issue almost entirely, aneutronic fusion offers the possibility of clean, safe, and sustainable power without the environmental and technical drawbacks of both traditional nuclear fission and neutron-heavy fusion.</p>
+    <p class="fadeable">Among the most promising reactions in aneutronic fusion is the fusion between a simple hydrogen nucleus (a proto and a boron-11 nucleus). When these two collide with enough energy, the result is three helium-4 nuclei, each of which is a stable, non-radioactive particle that carries away a portion of the fusion energy. This reaction is particularly attractive because it produces no neutrons as a primary output and generates only harmless helium, which is already abundant in nature and has no toxic or radioactive properties. Even more impressively, the alpha particles produced by this reaction are charged and fast-moving, meaning they can be used in direct energy conversion systems. Unlike traditional power plants which rely on heating water into steam to drive turbines aneutronic fusion offers the possibility of skipping the entire mechanical process and converting particle energy straight into electricity using advanced magnetic or electrostatic systems. This makes the entire energy production chain simpler, more compact, and far more efficient. In theory, this could allow aneutronic fusion reactors to be built in smaller forms, integrated into remote power stations, spacecraft, or submarines, and operate safely without the massive infrastructure required by current nuclear technologies.</p>
+    <p class="fadeable">Despite its alluring benefits, aneutronic fusion remains an extremely difficult goal to reach. The primary obstacle is the extreme energy required to initiate the reaction. While deuterium-tritium fusion can begin at around 100 million degrees Celsius, proton-boron fusion requires temperatures in excess of three billion degrees Celsius (more than 30 times higher). This means that any plasma reactor attempting aneutronic fusion must be able to heat and sustain matter at temperatures far hotter than the core of the Sun, for long enough and under enough pressure that meaningful fusion reactions occur. This is not just an engineering challenge but it is a frontier of physics itself. The conditions necessary for ignition are so demanding that even our most advanced magnetic confinement systems, like tokamaks and stellarators, are nowhere near capable of containing plasma under these constraints. Additionally, the fusion cross-sectionor the probability that particles will successfully collide and fuses very low for aneutronic fuels. This means that even at the right temperature, most collisions do not result in fusion, requiring denser plasmas, longer confinement times, and more precision, which adds even more pressure on reactor systems that are already being pushed beyond current technological limits.</p>
+<p class="fadeable">Nonetheless, research into aneutronic fusion continues with energy and urgency, driven by the possibility that it could completely change how humanity generates and consumes power. Several private companies and research teams are exploring alternative reactor designs that break away from traditional fusion models. One example is TAE Technologies, which is developing a field-reversed configuration (FRC) system designed to stabilize plasma with magnetic fields in a geometry that may better support proton-boron fusion. HB11 Energy, based in Australia, is pursuing a radically different path by using ultra-intense lasers to rapidly compress and ignite boron-rich fuel targets without the need for magnetic confinement. This laser-induced fusion concept, while still very new, promises a simpler and potentially more scalable route to aneutronic energy. Other groups are investigating electrostatic fusion systems, magneto-inertial confinement, and exotic magnetic mirror machines that might handle the extreme requirements more efficiently. While none of these have yet achieved net energy gain, each experiment and prototype pushes the limits of what’s possible, laying the foundation for eventual breakthroughs in plasma control, energy capture, or fusion fuel engineering.</p>
+<!-- This stays left-aligned -->
+<div style="width: 100%; text-align: left; margin-bottom: 20px;">
+  <button id="aneutronicToggleBtn"
+    onclick="toggleAneutronicModel()"
+    style="background: none; border: none; color: black; font-family: inherit; font-size: inherit; padding: 0; cursor: pointer; outline: none; display: inline-flex; align-items: center; gap: 6px;"
+    aria-expanded="false">
+    <span id="aneutronicArrow">▶</span>
+    <span id="aneutronicText">Show Aneutronic Fusion Model</span>
+  </button>
+</div>
+
+<!--  New centering wrapper -->
+<div style="width: 100%; display: flex; justify-content: center; margin-top: 20px;">
+  <!-- Model container centered -->
+  <div
+    id="aneutronicFusionContainer"
+    role="region"
+    aria-label="Aneutronic Fusion Model content"
+    style="border:none; border-radius:8px; padding:16px; background:transparent; box-shadow:none; display:none;"
+  >
+
+    <!-- Model UI container -->
+    <div id="aneutronicContainer" role="main" aria-label="Aneutronic Fusion Model" style="user-select:none;">
+      <div id="aneutronicScene" style="position:relative; width:700px; height:600px; perspective:1200px; background:transparent; overflow:visible; margin-bottom:30px;"></div>
+
+      <div
+        id="aneutronicDescription"
+        aria-live="polite"
+        aria-atomic="true"
+        style="max-width:700px; font-size:1rem; text-align:center; min-height:40px; line-height:1.3; margin-bottom:10px;"
+      >
+        Step 1: Proton approaching Boron-11 nucleus.
+      </div>
+
+      <div
+        id="aneutronicControls"
+        role="navigation"
+        aria-label="Fusion steps controls"
+        style="display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-top:10px;"
+      >
+        <button
+          id="aneutronicPrevBtn"
+          aria-label="Previous step"
+          disabled
+          style="background-color:#1e90ff; border:none; padding:8px 16px; font-size:14px; font-weight:bold; border-radius:6px; color:white; cursor:pointer; user-select:none; transition:background-color 0.3s ease;"
+        >
+          ← Prev
+        </button>
+        <button
+          id="aneutronicNextBtn"
+          aria-label="Next step"
+          style="background-color:#1e90ff; border:none; padding:8px 16px; font-size:14px; font-weight:bold; border-radius:6px; color:white; cursor:pointer; user-select:none; transition:background-color 0.3s ease;"
+        >
+          Next →
+        </button>
+        <button
+          id="aneutronicResetBtn"
+          aria-label="Reset animation"
+          style="background-color:#1e90ff; border:none; padding:8px 16px; font-size:14px; font-weight:bold; border-radius:6px; color:white; cursor:pointer; user-select:none; transition:background-color 0.3s ease;"
+        >
+          ⟲ Reset
+        </button>
+      </div>
+    </div>
+  </div> <!-- End of #aneutronicFusionContainer -->
+</div> <!--  End of centering wrapper -->
+
+
+  </div>
+</div>
+
+<style>
+  /* Basic sphere styles scoped to aneutronicScene container */
+  #aneutronicFusionContainer .afSphere {
+    position: absolute;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), transparent 80%),
+      radial-gradient(circle at 50% 65%, var(--color-base) 50%, var(--color-dark) 95%);
+    box-shadow:
+      inset 0 20px 20px rgba(255,255,255,0.6),
+      inset 0 -10px 15px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, opacity 0.5s ease;
+    pointer-events: none;
+  }
+  #aneutronicFusionContainer .label {
+    position: absolute;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255,255,255,0.8);
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    color: #222;
+  }
+  #aneutronicFusionContainer button:disabled {
+    background-color: #aaa !important;
+    cursor: default !important;
+  }
+  #aneutronicFusionContainer button:hover:not(:disabled) {
+    background-color: #104e8b !important;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Dropdown toggle button & arrow and text spans
+    const toggleBtn = document.getElementById('aneutronicToggleBtn');
+    const dropdown = document.getElementById('aneutronicFusionContainer');
+    const arrow = document.getElementById('aneutronicArrow');
+    const text = document.getElementById('aneutronicText');
+
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        dropdown.style.display = 'none';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        arrow.textContent = '▶';
+        text.textContent = 'Show Aneutronic Fusion Model';
+      } else {
+        dropdown.style.display = 'block';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        arrow.textContent = '▼';
+        text.textContent = 'Hide Aneutronic Fusion Model';
+      }
+    });
+
+    // Model elements
+    const scene = document.getElementById('aneutronicScene');
+    const description = document.getElementById('aneutronicDescription');
+    const prevBtn = document.getElementById('aneutronicPrevBtn');
+    const nextBtn = document.getElementById('aneutronicNextBtn');
+    const resetBtn = document.getElementById('aneutronicResetBtn');
+
+    class AfSphere3D {
+      constructor(name, baseColor, darkColor, size) {
+        this.name = name;
+        this.size = size;
+        this.pos = { x: 0, y: 0 };
+        this.scale = 1;
+        this.opacity = 1;
+        this.visible = true;
+
+        this.el = document.createElement('div');
+        this.el.classList.add('afSphere');
+        this.el.style.setProperty('--color-base', baseColor);
+        this.el.style.setProperty('--color-dark', darkColor);
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+
+        scene.appendChild(this.el);
+
+        this.labelEl = document.createElement('div');
+        this.labelEl.classList.add('label');
+        scene.appendChild(this.labelEl);
+
+        this.update();
+      }
+      setPosition(x, y) {
+        this.pos = { x, y };
+        this.update();
+      }
+      setScale(s) {
+        this.scale = s;
+        this.update();
+      }
+      setOpacity(o) {
+        this.opacity = o;
+        this.el.style.opacity = o;
+        this.labelEl.style.opacity = o;
+      }
+      setLabelText(text) {
+        this.labelEl.innerText = text;
+      }
+      update() {
+        if (!this.visible || this.opacity < 0.01 || this.scale < 0.01) {
+          this.el.style.display = 'none';
+          this.labelEl.style.display = 'none';
+          return;
+        }
+        const size = this.size * this.scale;
+        this.el.style.display = 'block';
+        this.labelEl.style.display = 'block';
+
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+        this.el.style.transform = `translate3d(${this.pos.x - size / 2}px, ${this.pos.y - size / 2}px, 0) scale(${this.scale})`;
+        this.el.style.opacity = this.opacity;
+
+        const labelX = this.pos.x;
+        const labelY = this.pos.y + size / 2 + 18;
+        this.labelEl.style.transform = `translate3d(${labelX}px, ${labelY}px, 0)`;
+        this.labelEl.style.opacity = this.opacity;
+      }
+      hide() {
+        this.visible = false;
+        this.update();
+      }
+      show() {
+        this.visible = true;
+        this.update();
+      }
+    }
+
+    const centerX = 350;
+    const centerY = 300;
+
+    const boronNucleus = new AfSphere3D('boronNucleus', '#b22222', '#4b0000', 120);
+    boronNucleus.setLabelText('Boron-11 Nucleus');
+
+    const incomingProton = new AfSphere3D('incomingProton', '#1e90ff', '#004080', 60);
+    incomingProton.setLabelText('Proton');
+
+    const alphaParticles = [
+      new AfSphere3D('alpha1', '#ffca28', '#b28600', 50),
+      new AfSphere3D('alpha2', '#ffca28', '#b28600', 50),
+      new AfSphere3D('alpha3', '#ffca28', '#b28600', 50)
+    ];
+    alphaParticles.forEach(alpha => alpha.setLabelText('Alpha Particle'));
+
+    const steps = [
+      {
+        desc: 'Step 1: Proton approaching Boron-11 nucleus.',
+        targets: {
+          boronNucleus: { x: centerX, y: centerY, s: 1, o: 1 },
+          incomingProton: { x: centerX - 280, y: centerY + 80, s: 1, o: 1 },
+          alpha1: { x: centerX, y: centerY, s: 1, o: 0 },
+          alpha2: { x: centerX, y: centerY, s: 1, o: 0 },
+          alpha3: { x: centerX, y: centerY, s: 1, o: 0 }
+        }
+      },
+      {
+        desc: 'Step 2: Proton moves into Boron-11 nucleus.',
+        targets: {
+          boronNucleus: { x: centerX, y: centerY, s: 1.1, o: 1 },
+          incomingProton: { x: centerX, y: centerY, s: 1, o: 1 },
+          alpha1: { x: centerX, y: centerY, s: 1, o: 0 },
+          alpha2: { x: centerX, y: centerY, s: 1, o: 0 },
+          alpha3: { x: centerX, y: centerY, s: 1, o: 0 }
+        }
+      },
+      {
+        desc: 'Step 3: Fusion reaction releases three alpha particles.',
+        targets: {
+          boronNucleus: { x: centerX, y: centerY, s: 0.9, o: 1 },
+          incomingProton: { x: centerX, y: centerY, s: 0, o: 0 },
+          alpha1: { x: centerX + 220, y: centerY - 130, s: 1.4, o: 1 },
+          alpha2: { x: centerX - 210, y: centerY + 120, s: 1.4, o: 1 },
+          alpha3: { x: centerX + 90, y: centerY + 170, s: 1.4, o: 1 }
+        }
+      }
+    ];
+
+    let state = 0;
+
+    // Initialize positions directly to avoid jump/flicker on first render
+    const positions = {
+      boronNucleus: { x: steps[0].targets.boronNucleus.x, y: steps[0].targets.boronNucleus.y, s: steps[0].targets.boronNucleus.s, o: steps[0].targets.boronNucleus.o },
+      incomingProton: { x: steps[0].targets.incomingProton.x, y: steps[0].targets.incomingProton.y, s: steps[0].targets.incomingProton.s, o: steps[0].targets.incomingProton.o },
+      alpha1: { x: steps[0].targets.alpha1.x, y: steps[0].targets.alpha1.y, s: steps[0].targets.alpha1.s, o: steps[0].targets.alpha1.o },
+      alpha2: { x: steps[0].targets.alpha2.x, y: steps[0].targets.alpha2.y, s: steps[0].targets.alpha2.s, o: steps[0].targets.alpha2.o },
+      alpha3: { x: steps[0].targets.alpha3.x, y: steps[0].targets.alpha3.y, s: steps[0].targets.alpha3.s, o: steps[0].targets.alpha3.o }
+    };
+
+    // Set initial sphere states
+    boronNucleus.setPosition(positions.boronNucleus.x, positions.boronNucleus.y);
+    boronNucleus.setScale(positions.boronNucleus.s);
+    boronNucleus.setOpacity(positions.boronNucleus.o);
+
+    incomingProton.setPosition(positions.incomingProton.x, positions.incomingProton.y);
+    incomingProton.setScale(positions.incomingProton.s);
+    incomingProton.setOpacity(positions.incomingProton.o);
+
+    alphaParticles.forEach((alpha, i) => {
+      const key = 'alpha' + (i + 1);
+      alpha.setPosition(positions[key].x, positions[key].y);
+      alpha.setScale(positions[key].s);
+      alpha.setOpacity(positions[key].o);
+    });
+
+    const lerp = (start, end, t) => start + (end - start) * t;
+
+    function animate() {
+      if (dropdown.style.display === 'none') {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      const t = 0.12;
+      const target = steps[state].targets;
+
+      for (const key in positions) {
+        positions[key].x = lerp(positions[key].x, target[key].x, t);
+        positions[key].y = lerp(positions[key].y, target[key].y, t);
+        positions[key].s = lerp(positions[key].s, target[key].s, t);
+        positions[key].o = lerp(positions[key].o, target[key].o, t);
+      }
+
+      boronNucleus.setPosition(positions.boronNucleus.x, positions.boronNucleus.y);
+      boronNucleus.setScale(positions.boronNucleus.s);
+      boronNucleus.setOpacity(positions.boronNucleus.o);
+      boronNucleus.show();
+
+      incomingProton.setPosition(positions.incomingProton.x, positions.incomingProton.y);
+      incomingProton.setScale(positions.incomingProton.s);
+      incomingProton.setOpacity(positions.incomingProton.o);
+      if (positions.incomingProton.s < 0.05 || positions.incomingProton.o < 0.05) incomingProton.hide();
+      else incomingProton.show();
+
+      alphaParticles.forEach((alpha, i) => {
+        const key = 'alpha' + (i + 1);
+        alpha.setPosition(positions[key].x, positions[key].y);
+        alpha.setScale(positions[key].s);
+        alpha.setOpacity(positions[key].o);
+        if (positions[key].s < 0.05 || positions[key].o < 0.05) alpha.hide();
+        else alpha.show();
+      });
+
+      description.textContent = steps[state].desc;
+
+      requestAnimationFrame(animate);
+    }
+
+    function updateUI() {
+      prevBtn.disabled = state === 0;
+      nextBtn.disabled = state === steps.length - 1;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (state > 0) {
+        state--;
+        updateUI();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (state < steps.length - 1) {
+        state++;
+        updateUI();
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      state = 0;
+      updateUI();
+    });
+
+    updateUI();
+    animate();
+  });
+</script>
+
+
+
+</div>
+</div>
+<h2 class="header-sans line-flex">
+  Z-pinch
+  <span class="line-fill-inline"></span>
+</h2>
+
+      <div class="content-box fadeable">
+        <div class="light-blue-box">
+    <p class="fadeable">The Z pinch is a plasma confinement method that relies on the fundamental principles of electromagnetism to compress and heat a plasma using its own electric current. The core idea of the Z pinch is simple in concept but extremely complex in practice. When a large pulse of electric current flows through a plasma along a straight path, that current generates a magnetic field that loops around the axis of the current. This magnetic field then interacts with the electric current itself through a force known as the Lorentz force, which causes the plasma to be squeezed inward from all directions. This effect is called the pinch effect, and when the current flows vertically along what is known as the Z axis in a cylindrical coordinate system, it becomes known as a Z pinch. The inward force acts uniformly on the entire plasma column and can, in theory, compress the plasma to extreme densities and temperatures. When the compression is strong enough, nuclear fusion conditions may be achieved inside the plasma. This entire process happens without external magnetic coils because the magnetic field is generated internally by the plasma's own current. The pinch force grows stronger as the current increases, which means the amount of compression is directly related to the amount of electric current delivered in the pulse. This makes the Z pinch a dynamic and self-driven form of plasma confinement, where everything depends on timing, energy, and the geometry of the plasma channel. The energy input must be rapid and massive, often delivered in the form of an intense electrical discharge from capacitors or explosive power banks that release all their stored energy in a fraction of a second.</p>
+  <p class="fadeable"> In practice, the Z pinch involves sending millions of amperes of current through a plasma in a short duration, typically measured in nanoseconds or microseconds. As the current rushes through the plasma, the surrounding magnetic field intensifies rapidly and begins squeezing the plasma into an ever tighter and hotter column. The plasma resists this compression, creating an intense balance between the inward magnetic pressure and the outward thermal and kinetic motion of the plasma particles. If this balance holds for even a short time, the plasma may reach temperatures of tens or hundreds of millions of degrees, and the ion density may rise high enough for nuclear fusion reactions to begin occurring. The fusion reactions release more energy in the form of energetic particles and radiation, which then further heat the surrounding plasma and help sustain the reaction for a brief instant. The entire process is incredibly fast and violent, with each pinch event lasting only a tiny fraction of a second before the plasma loses confinement or disassembles due to internal turbulence or instabilities. Controlling these ultra-brief pulses of energy requires extremely precise coordination between the electrical systems, the plasma formation, and the chamber in which the reaction occurs. The plasma must be formed cleanly with minimal contamination from materials, and the current must be shaped so that it compresses the plasma uniformly from all sides. Even slight asymmetries in current distribution or plasma density can create hotspots, distortions, or waves inside the plasma that eventually lead to a breakdown in confinement.</p>
+  <p class="fadeable">A major challenge in Z pinch systems arises from the natural tendency of plasmas to become unstable under compression. These instabilities are not external errors but inherent behaviors of plasmas under strong magnetic and thermal stress. One of the most prominent forms of instability is the sausage instability, in which the plasma column begins to form bulging and thinning regions along its length, like links in a chain of sausages. Another common mode is the kink instability, where the entire plasma column twists and writhes like a rope being twisted beyond its limit. These instabilities grow rapidly and can destroy the uniformity of the plasma, causing it to break apart or shift away from the high-pressure zone where fusion is occurring. To suppress or control these instabilities, researchers experiment with different ways of shaping the current pulse, using additional magnetic field structures, or injecting materials to stabilize the outer regions of the plasma. Some approaches attempt to modify the electrical conductivity or viscosity of the plasma to smooth out disturbances as they form. The fight against plasma instabilities is one of the defining problems of Z pinch fusion research. Without solutions to these instabilities, the plasma disassembles before meaningful energy production can occur, and the entire cycle must be restarted with a new pulse. Each test or experiment lasts for only fractions of a second, but the data gathered from these short-lived reactions gives researchers clues about how to manage future iterations and improve stability through better control of current, pressure, and timing.</p>
+
+<div style="width: 100%; text-align: left; margin-bottom: 12px;">
+  <button id="toggleZPinchBtn"
+    style="background: none;
+  border: none;
+  color: black;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  "
+  aria-expanded="false">
+    ▶ Show Z-Pinch Model
+  </button>
+
+
+
+<div id="zContainer" style="max-width: 600px; margin: 0 auto; display: none;">
+  <div id="zScene" aria-label="Z-Pinch Fusion Simulation" style="position: relative; width: 600px; height: 600px; perspective: 1200px; background: transparent; box-sizing: border-box; overflow: visible;"></div>
+  <div id="plasmaLabel" class="zLabel" style="position: absolute; font-weight: bold; text-shadow: 0 0 6px rgba(255,255,255,0.9); font-size: 18px; white-space: nowrap; pointer-events: none; user-select: none; left: 50%; transform: translateX(-50%); top: 540px; color: #29b6f6;">Plasma Column</div>
+  <div id="zDescription" aria-live="polite" style="max-width: 600px; margin: 8px 0 4px; font-size: 1rem; text-align: center; min-height: 30px; line-height: 1.3;">
+    Step 1: Plasma column begins forming with electric current flow along the Z-axis.
+  </div>
+  <div id="zControls" role="group" aria-label="Simulation controls" style="display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 10px 0 0;">
+    <button id="zPrevBtn" disabled aria-disabled="true" style="background-color: #4a90e2; border: none; padding: 6px 14px; font-size: 14px; font-weight: bold; border-radius: 4px; color: white; cursor: pointer; user-select: none; transition: background-color 0.3s ease;">← Previous</button>
+    <button id="zNextBtn" aria-disabled="false" style="background-color: #4a90e2; border: none; padding: 6px 14px; font-size: 14px; font-weight: bold; border-radius: 4px; color: white; cursor: pointer; user-select: none; transition: background-color 0.3s ease;">Next →</button>
+    <button id="zResetBtn" style="background-color: #4a90e2; border: none; padding: 6px 14px; font-size: 14px; font-weight: bold; border-radius: 4px; color: white; cursor: pointer; user-select: none; transition: background-color 0.3s ease;">⟲ Reset</button>
+  </div>
+</div>
+
+<style>
+  .zSphere {
+    position: absolute;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    background:
+      radial-gradient(circle at 40% 40%, rgba(255,255,255,0.7), transparent 85%),
+      radial-gradient(circle at 55% 65%, var(--color-base) 50%, var(--color-dark) 90%);
+    box-shadow:
+      inset 0 30px 40px rgba(255,255,255,0.6),
+      inset 0 -15px 30px rgba(0,0,0,0.4);
+    transition: box-shadow 0.2s ease;
+    will-change: transform, opacity;
+  }
+  .zLabel {
+    position: absolute;
+    font-weight: bold;
+    text-shadow: 0 0 6px rgba(255,255,255,0.9);
+    font-size: 18px;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  button:disabled {
+    background-color: #aaa !important;
+    cursor: default !important;
+  }
+  .zParticle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffd54f, #ff6f00);
+    box-shadow: 0 0 10px #ffb300;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform, opacity;
+    z-index: 10;
+  }
+  #energyPulse {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(255, 69, 0, 0.4);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    will-change: opacity, width, height;
+    transition: opacity 0.3s ease;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const zScene = document.getElementById('zScene');
+    const zDescription = document.getElementById('zDescription');
+    const zPrevBtn = document.getElementById('zPrevBtn');
+    const zNextBtn = document.getElementById('zNextBtn');
+    const zResetBtn = document.getElementById('zResetBtn');
+    const plasmaLabel = document.getElementById('plasmaLabel');
+    const energyPulse = document.createElement('div');
+    energyPulse.id = 'energyPulse';
+    zScene.appendChild(energyPulse);
+
+    class ZSphere {
+      constructor(name, baseColor, darkColor, size) {
+        this.el = document.createElement('div');
+        this.el.classList.add('zSphere');
+        zScene.appendChild(this.el);
+        this.size = size;
+        this.pos = {x: 300, y: 300, z: 0};
+        this.scale = 1;
+        this.visible = true;
+        this.el.style.setProperty('--color-base', baseColor);
+        this.el.style.setProperty('--color-dark', darkColor);
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+        this.update();
+      }
+      setPosition(x, y, z = 0) {
+        this.pos = {x, y, z};
+        this.update();
+      }
+      setScale(s) {
+        this.scale = s;
+        this.update();
+      }
+      setOpacity(o) {
+        this.el.style.opacity = o;
+      }
+      update() {
+        const size = this.size * this.scale;
+        this.el.style.display = this.visible ? 'block' : 'none';
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+        this.el.style.transform = `translate3d(${this.pos.x - size/2}px, ${this.pos.y - size/2}px, ${this.pos.z}px) scale(${this.scale})`;
+      }
+      hide() { this.visible = false; this.update(); }
+      show() { this.visible = true; this.update(); }
+    }
+
+    class ZParticle {
+      constructor() {
+        this.el = document.createElement('div');
+        this.el.classList.add('zParticle');
+        zScene.appendChild(this.el);
+        this.reset();
+      }
+      reset() {
+        this.x = 300;
+        this.y = 300;
+        this.vx = (Math.random() - 0.5) * 6;
+        this.vy = (Math.random() - 0.5) * 6;
+        this.life = 40 + Math.random() * 30;
+        this.age = 0;
+        this.opacity = 1;
+        this.visible = false;
+        this.update();
+      }
+      emit(x, y) {
+        this.x = x;
+        this.y = y;
+        this.age = 0;
+        this.opacity = 1;
+        this.visible = true;
+        this.update();
+      }
+      update() {
+        if (!this.visible) {
+          this.el.style.opacity = 0;
+          return;
+        }
+        this.el.style.transform = `translate3d(${this.x}px, ${this.y}px, 0)`;
+        this.el.style.opacity = this.opacity;
+      }
+      step() {
+        if (!this.visible) return;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.age++;
+        this.opacity = 1 - this.age / this.life;
+        if (this.age >= this.life) {
+          this.reset();
+        } else {
+          this.update();
+        }
+      }
+    }
+
+    const centerX = 300;
+    const centerY = 300;
+
+    const segmentCount = 6;
+    const plasmaSegments = [];
+    for (let i = 0; i < segmentCount; i++) {
+      const size = 50 + i * 6;
+      const sphere = new ZSphere(`plasma${i}`, '#29b6f6', '#0288d1', size);
+      sphere.setPosition(centerX, centerY - (segmentCount/2 - i) * 70);
+      plasmaSegments.push(sphere);
+    }
+
+    const compressedPlasma = new ZSphere('compressed', '#ff3d00', '#b71c1c', 140);
+    compressedPlasma.setPosition(centerX, centerY);
+    compressedPlasma.hide();
+
+    const particleCount = 30;
+    const particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new ZParticle());
+    }
+
+    const steps = [
+      {
+        description: "Step 1: Plasma column begins forming with electric current flow along the Z-axis.",
+        spheres: plasmaSegments.map((_, i) => ({
+          x: centerX,
+          y: centerY - (segmentCount/2 - i) * 70,
+          scale: 1,
+          visible: true,
+          opacity: 1
+        })),
+        compressedVisible: false,
+        particleEmit: false,
+        energyPulse: false
+      },
+      {
+        description: "Step 2: Magnetic field compresses plasma inward, causing increased density and temperature.",
+        spheres: plasmaSegments.map((_, i) => ({
+          x: centerX + Math.sin(i * 0.7) * 10,
+          y: centerY - (segmentCount/2 - i) * 50 + Math.cos(i * 1.3) * 8,
+          scale: 1.4,
+          visible: true,
+          opacity: 1
+        })),
+        compressedVisible: false,
+        particleEmit: false,
+        energyPulse: false
+      },
+      {
+        description: "Step 3: Plasma is fully compressed, reaching fusion-relevant temperature and density.",
+        spheres: plasmaSegments.map(() => ({ visible: false })),
+        compressedVisible: true,
+        compressedPos: {x: centerX, y: centerY},
+        particleEmit: true,
+        energyPulse: true
+      },
+      {
+        description: "Step 4: Fusion reactions produce bursts of energetic particles and energy.",
+        spheres: plasmaSegments.map(() => ({ visible: false })),
+        compressedVisible: true,
+        compressedPos: {x: centerX, y: centerY},
+        particleEmit: true,
+        energyPulse: true
+      },
+      {
+        description: "Step 5: Plasma disperses as the fusion pulse ends, releasing energy to surroundings.",
+        spheres: plasmaSegments.map(() => ({
+          visible: false
+        })),
+        compressedVisible: false,
+        particleEmit: false,
+        energyPulse: false,
+        dispersing: true
+      }
+    ];
+
+    let currentStep = 0;
+    let wobbleTime = 0;
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function updateUI() {
+      zDescription.textContent = steps[currentStep].description;
+      zPrevBtn.disabled = currentStep === 0;
+      zNextBtn.disabled = currentStep === steps.length - 1;
+      zPrevBtn.setAttribute('aria-disabled', currentStep === 0);
+      zNextBtn.setAttribute('aria-disabled', currentStep === steps.length - 1);
+    }
+
+    zPrevBtn.onclick = () => {
+      if (currentStep > 0) currentStep--;
+      updateUI();
+    };
+    zNextBtn.onclick = () => {
+      if (currentStep < steps.length - 1) currentStep++;
+      updateUI();
+    };
+    zResetBtn.onclick = () => {
+      currentStep = 0;
+      updateUI();
+    };
+
+    function animate() {
+      wobbleTime += 0.03;
+      const step = steps[currentStep];
+
+      plasmaLabel.style.opacity = currentStep < 3 ? 1 : 0;
+
+      plasmaSegments.forEach((sphere, i) => {
+        const target = step.spheres[i] || { visible: false };
+        if (!target.visible) {
+          if(step.dispersing) {
+            let newOpacity = parseFloat(sphere.el.style.opacity || "1") - 0.01;
+            newOpacity = Math.max(newOpacity, 0);
+            sphere.setOpacity(newOpacity);
+            if (newOpacity === 0) sphere.hide();
+            return;
+          }
+          sphere.hide();
+          return;
+        }
+        sphere.show();
+        sphere.setOpacity(target.opacity ?? 1);
+
+        let wobbleX = 0, wobbleY = 0;
+        if (currentStep === 1) {
+          wobbleX = Math.sin(wobbleTime * 3 + i) * 4;
+          wobbleY = Math.cos(wobbleTime * 2 + i * 1.5) * 3;
+        }
+
+        const newX = lerp(sphere.pos.x, target.x + wobbleX, 0.1);
+        const newY = lerp(sphere.pos.y, target.y + wobbleY, 0.1);
+        const newScale = lerp(sphere.scale, target.scale, 0.1);
+
+        sphere.setPosition(newX, newY);
+        sphere.setScale(newScale);
+      });
+
+      if (step.compressedVisible) {
+        compressedPlasma.show();
+        const pos = compressedPlasma.pos;
+        const targetX = (step.compressedPos && step.compressedPos.x !== undefined) ? step.compressedPos.x : centerX;
+        const targetY = (step.compressedPos && step.compressedPos.y !== undefined) ? step.compressedPos.y : centerY;
+        const newX = lerp(pos.x, targetX, 0.1);
+        const newY = lerp(pos.y, targetY, 0.1);
+        const targetScale = currentStep >= 2 && currentStep < 4 ? 1.2 : 1;
+        const newScale = lerp(compressedPlasma.scale, targetScale, 0.1);
+        compressedPlasma.setPosition(newX, newY);
+        compressedPlasma.setScale(newScale);
+
+        if(step.dispersing) {
+          let newOpacity = parseFloat(compressedPlasma.el.style.opacity || "1") - 0.02;
+          newOpacity = Math.max(newOpacity, 0);
+          compressedPlasma.setOpacity(newOpacity);
+          if(newOpacity === 0) compressedPlasma.hide();
+        } else {
+          compressedPlasma.setOpacity(1);
+        }
+      } else {
+        compressedPlasma.hide();
+      }
+
+      if (step.energyPulse) {
+        energyPulse.style.opacity = 0.5 + 0.3 * Math.sin(wobbleTime * 10);
+        const pulseSize = 140 + 15 * Math.sin(wobbleTime * 10);
+        energyPulse.style.width = pulseSize + 'px';
+        energyPulse.style.height = pulseSize + 'px';
+        energyPulse.style.left = ((step.compressedPos && step.compressedPos.x !== undefined) ? step.compressedPos.x : centerX) + 'px';
+        energyPulse.style.top = ((step.compressedPos && step.compressedPos.y !== undefined) ? step.compressedPos.y : centerY) + 'px';
+      } else {
+        energyPulse.style.opacity = 0;
+      }
+
+      if (step.particleEmit) {
+        const cx = (step.compressedPos && step.compressedPos.x !== undefined) ? step.compressedPos.x : centerX;
+        const cy = (step.compressedPos && step.compressedPos.y !== undefined) ? step.compressedPos.y : centerY;
+        particles.forEach(p => {
+          if (!p.visible && Math.random() < 0.12) {
+            p.emit(cx, cy);
+          }
+          p.step();
+        });
+      } else {
+        particles.forEach(p => {
+          p.visible = false;
+          p.update();
+        });
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    updateUI();
+    animate();
+
+    // Toggle logic for dropdown
+    const toggleBtn = document.getElementById('toggleZPinchBtn');
+    const container = document.getElementById('zContainer');
+
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = container.style.display === 'block';
+      if (isVisible) {
+        container.style.display = 'none';
+        toggleBtn.textContent = '▶ Show Z-Pinch Model';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        container.style.display = 'block';
+        toggleBtn.textContent = '▼ Hide Z-Pinch Model';
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+</div>
+</div>
+</div>
+
+
+</main>
+
+  <footer>
+    &copy; 2025 Nuclear Energy Site — All Rights Reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  // Main dropdown toggle
+  const mainBtn = document.getElementById('mainDropdownButton');
+  const mainContent = document.getElementById('mainDropdownContent');
+
+  mainBtn.addEventListener('click', () => {
+    const expanded = mainBtn.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      mainContent.style.display = 'none';
+      mainBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      mainContent.style.display = 'block';
+      mainBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Get all nested dropdown buttons and their content/arrows
+  const nestedDropdowns = [
+    {
+      button: document.getElementById('nuclearDropdownButton'),
+      content: document.getElementById('nuclearDropdownContent'),
+      arrow: document.getElementById('nuclearDropdownArrow')
+    },
+    {
+      button: document.getElementById('reactorDropdownButton'),
+      content: document.getElementById('reactorDropdownContent'),
+      arrow: document.getElementById('reactorDropdownArrow')
+    }
+    // IMPORTANT: If you add more nested dropdowns in the future, add them to this array!
+    /*
+    {
+      button: document.getElementById('yourNewDropdownButtonId'),
+      content: document.getElementById('yourNewDropdownContentId'),
+      arrow: document.getElementById('yourNewDropdownArrowId')
+    }
+    */
+  ];
+
+  nestedDropdowns.forEach(currentDropdown => {
+    currentDropdown.button.addEventListener('click', (event) => {
+      // Prevent the click from propagating to the window and closing everything
+      event.stopPropagation(); 
+
+      const isOpen = currentDropdown.button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other nested dropdowns
+      nestedDropdowns.forEach(otherDropdown => {
+        if (otherDropdown !== currentDropdown && otherDropdown.button.getAttribute('aria-expanded') === 'true') {
+          otherDropdown.content.style.display = 'none';
+          otherDropdown.arrow.textContent = '▶';
+          otherDropdown.button.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Toggle the current dropdown
+      if (isOpen) {
+        currentDropdown.content.style.display = 'none';
+        currentDropdown.arrow.textContent = '▶';
+        currentDropdown.button.setAttribute('aria-expanded', 'false');
+      } else {
+        currentDropdown.content.style.display = 'block';
+        currentDropdown.arrow.textContent = '▼';
+        currentDropdown.button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+
+  // Close dropdowns if clicking outside
+  window.addEventListener('click', (event) => {
+    const isClickInsideMain = mainBtn.contains(event.target) || mainContent.contains(event.target);
+    if (!isClickInsideMain) {
+      mainContent.style.display = 'none';
+      mainBtn.setAttribute('aria-expanded', 'false');
+
+      // Also close all nested dropdowns when clicking outside the main dropdown
+      nestedDropdowns.forEach(dropdown => {
+        dropdown.content.style.display = 'none';
+        dropdown.arrow.textContent = '▶';
+        dropdown.button.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Existing animation and scroll logic (DO NOT REMOVE THESE)
+  const headerContent = document.getElementById('header-content');
+  const headerImage = document.querySelector('.header-logo');
+  const hasAnimatedHeader = sessionStorage.getItem('headerAnimated') === 'true';
+
+  const showHeader = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        headerContent.classList.add('visible');
+        sessionStorage.setItem('headerAnimated', 'true');
+      });
+    });
+  };
+
+  if (hasAnimatedHeader) {
+    headerContent.classList.add('visible');
+    headerContent.style.transition = 'none';
+  } else {
+    if (headerImage.complete) {
+      showHeader();
+    } else {
+      headerImage.addEventListener('load', showHeader);
+    }
+  }
+
+  const circles = document.querySelectorAll('.shape-line');
+  circles.forEach(circle => (circle.style.opacity = '0'));
+  circles.forEach((circle, index) => {
+    setTimeout(() => {
+      circle.style.opacity = '1';
+    }, index * 80);
+  });
+
+  const scrollElements = document.querySelectorAll('.scroll-animate');
+  const handleScrollAnimate = () => {
+    const windowBottom = window.innerHeight + window.pageYOffset;
+    scrollElements.forEach((el) => {
+      if (el.offsetTop < windowBottom - 100) {
+        el.classList.add('visible');
+      }
+    });
+  };
+  handleScrollAnimate();
+  window.addEventListener('scroll', handleScrollAnimate);
+
+  // Removed the old 'dropdown' and 'dropdownButton' logic as it's replaced by mainBtn/mainContent
+  // const dropdown = document.getElementById('dropdown');
+  // const dropdownButton = document.getElementById('dropdownButton');
+  // dropdownButton.addEventListener('click', () => { ... });
+  // window.addEventListener('click', (event) => { ... });
+
+  // Navigation link fade-out
+  const links = document.querySelectorAll('a[href]');
+  const fadeables = document.querySelectorAll('.fadeable');
+  const allCircles = document.querySelectorAll('.shape-line');
+  const allH2 = document.querySelectorAll('h2');
+  const allParagraphs = Array.from(document.querySelectorAll('p')).filter(p => !p.classList.contains('subtitle'));
+  const fadeTargets = [...allCircles, ...allH2, ...allParagraphs];
+
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href === window.location.pathname) return;
+      e.preventDefault();
+      fadeTargets.forEach(el => {
+        el.style.transition = 'opacity 0.7s ease';
+        el.style.opacity = '0';
+      });
+      setTimeout(() => {
+        window.location.href = href;
+      }, 700);
+    });
+  });
+
+  // Fade-in effect for the main content
+  const fadeInContent = document.getElementById('fade-in-content');
+  setTimeout(() => {
+    fadeInContent.style.opacity = '1';
+  }, 50);
+
+  // Scroll animation for elements (duplicate, keeping the one that was more complete)
+  // const scrollElements = document.querySelectorAll('.scroll-animate'); // Already defined above
+
+  const elementInView = (el, offset = 100) => {
+    const elementTop = el.getBoundingClientRect().top;
+    return elementTop <= (window.innerHeight || document.documentElement.clientHeight) - offset;
+  };
+
+  const displayScrollElement = (element) => {
+    element.classList.add('visible');
+  };
+
+  const handleScrollAnimation = () => { // Already defined above, consolidating logic
+    scrollElements.forEach(el => {
+      if (elementInView(el, 100)) {
+        displayScrollElement(el);
+      }
+    });
+  };
+
+  // Ensure scroll event listener is only added once if consolidating
+  // window.addEventListener('scroll', handleScrollAnimation); // Already added above
+  // handleScrollAnimation(); // Already called above
+});
+
+</script>
+
+</body>
+</html>

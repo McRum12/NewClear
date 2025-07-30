@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nuclear Energy</title>
+   <link rel="preload" href="logo.png" as="image" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" as="style" />
+
+  <style>
+    .dropdown-content a {
+  font-family: 'Inter', sans-serif;
+  display: block;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e293b;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: normal; /* NEW: Allows text to wrap */
+}
+p {
+  p {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 20px;
+}
+}
+.line-flex {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space between text and line */
+}
+
+.line-fill-inline {
+  flex-grow: 1;
+  height: 3px; /* slightly thinner */
+  background-color: #59687a; /* updated color */
+  border-radius: 2px;
+}
+    .shape-line {
+      opacity: 0;
+      transition: opacity 2.5s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    @keyframes moveAround {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(-15px, 10px) scale(1.05);
+      }
+      50% {
+        transform: translate(0, 20px) scale(1);
+      }
+      75% {
+        transform: translate(15px, 10px) scale(0.95);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    body {
+      background: #ffffff;
+      color: #1e293b;
+      font-family: Georgia, serif;
+      line-height: 1.6;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-size: 20.5px;
+    
+    }
+    .dropdown-button,
+.dropdown-content a {
+  font: georgia, serif;
+  font-size: 20.5;
+}
+#nuclearDropdownButton {
+  font-family: 'Inter', sans-serif;; /* same font as dropdown links */
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e293b;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center; /* vertical align */
+  gap: 6px;
+  user-select: none;
+  line-height: 1.2;
+}
+#nuclearDropdownArrow {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  margin-top: 1px;
+}
+
+    header {
+      background-color: #1e293b;
+      color: #f1f5f9;
+      padding: 2rem;
+      width: 100vw;
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(30, 41, 59, 0.2);
+      border-radius: 14px;
+    }
+
+    .header-decor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 14px;
+    }
+
+    .header-decor::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(100, 149, 237, 0.1) 35%,
+        rgba(100, 149, 237, 0.4) 50%,
+        rgba(100, 149, 237, 0.1) 65%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      background-size: 200% 100%;
+      background-position: 90% 0;
+      border-radius: inherit;
+    }
+
+    .fade-out {
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .shape-line {
+      position: absolute;
+      border: 3px solid rgba(200, 220, 255, 0.5);
+      border-radius: 50%;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.15));
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.25);
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+    }
+
+    @keyframes moveScaleYSubtle {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(28px) scale(1.1);
+      }
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleXSubtleReverse {
+      0% {
+        transform: translateX(0) scale(1);
+      }
+      50% {
+        transform: translateX(-40px) scale(0.9);
+      }
+      100% {
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleDiag {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(-27px, 19px) scale(1.12);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    @keyframes moveScaleDiagReverse {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(32px, -19px) scale(0.88);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    @keyframes scalePulseCenter {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      50% {
+        transform: translate(12px, -12px) scale(0.85);
+      }
+    }
+
+    .shape-line-1 {
+      width: 140px;
+      height: 140px;
+      top: 50px;
+      left: 20px;
+      animation: moveScaleYSubtle 7.5s infinite;
+    }
+
+    .shape-line-2 {
+      width: 150px;
+      height: 150px;
+      top: 10px;
+      left: 140px;
+      animation: moveScaleXSubtleReverse 8.5s infinite;
+    }
+
+    .shape-line-3 {
+      width: 110px;
+      height: 110px;
+      top: 40px;
+      left: 320px;
+      animation: moveScaleDiagReverse 7.5s infinite;
+    }
+
+    .shape-line-13 {
+      width: 120px;
+      height: 120px;
+      top: 140px;
+      left: 400px;
+      animation: moveScaleYSubtle 7.8s infinite;
+    }
+
+    .shape-line-14 {
+      width: 110px;
+      height: 110px;
+      top: 170px;
+      left: 920px;
+      animation: moveAround 7s infinite ease-in-out;
+      border-color: rgba(200, 220, 255, 0.4);
+    }
+
+    .shape-line-4 {
+      width: 180px;
+      height: 180px;
+      top: 20px;
+      left: 520px;
+      animation: moveScaleDiag 7s infinite;
+    }
+
+    .shape-line-5 {
+      width: 200px;
+      height: 200px;
+      top: 70px;
+      left: 670px;
+      animation: moveScaleYSubtle 6.5s infinite;
+    }
+
+    .shape-line-6 {
+      width: 140px;
+      height: 140px;
+      top: 30px;
+      left: 840px;
+      animation: moveScaleYSubtle 5.8s infinite;
+    }
+
+    .shape-line-7 {
+      width: 180px;
+      height: 180px;
+      top: 90px;
+      left: 1020px;
+      animation: moveScaleDiagReverse 6.8s infinite;
+    }
+
+    .shape-line-8 {
+      width: 150px;
+      height: 150px;
+      top: 15px;
+      left: 1140px;
+      animation: moveScaleYSubtle 7.1s infinite;
+    }
+
+    .shape-line-9 {
+      width: 130px;
+      height: 130px;
+      top: 70px;
+      left: 1280px;
+      animation: moveScaleDiag 5.8s infinite;
+    }
+
+    .shape-line-10 {
+      width: 160px;
+      height: 160px;
+      top: 40px;
+      left: 1380px;
+      animation: moveScaleYSubtle 6.5s infinite;
+    }
+
+    .shape-line-11 {
+      width: 130px;
+      height: 130px;
+      top: 90px;
+      left: 1530px;
+      animation: moveScaleDiagReverse 6s infinite;
+    }
+
+    .shape-line-12 {
+      width: 160px;
+      height: 160px;
+      top: 70px;
+      left: 1670px;
+      animation: scalePulseCenter 6.3s infinite;
+    }
+
+    .shape-line-center {
+      width: 230px;
+      height: 230px;
+      top: 50%;
+      left: 150px;
+      transform: translate(-50%, -50%);
+      animation: scalePulseCenter 6s infinite;
+    }
+
+    .header-logo-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      z-index: 2;
+    }
+
+    .header-logo {
+      width: 280px;
+      border-radius: 14px;
+      z-index: 1;
+    }
+
+    .header-content-wrapper {
+      position: relative;
+      display: inline-block;
+      border-radius: 14px;
+      padding: 1.5rem 2.5rem;
+      max-width: max-content;
+      z-index: 1;
+      min-width: 800px;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: none;
+    }
+
+    .header-content.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin: 0 0 0.3rem 0;
+      letter-spacing: -0.03em;
+      border-bottom: 3px solid #94a3b8;
+      padding-bottom: 0.3rem;
+      max-width: max-content;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      font-style: normal;
+      color: #64748b;
+      margin-top: 0.2rem;
+      font-weight: 500;
+      letter-spacing: 0;
+      background: linear-gradient(90deg, #64748b 0%, #cbd5e1 40%, #64748b 80%);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 10s ease-in-out infinite;
+      opacity: 0.85;
+    }
+
+    nav {
+      background-color: #f1f5f9;
+      width: 100vw;
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding-left: 3rem;
+      box-sizing: border-box;
+      border-radius: 0 0 14px 14px;
+      z-index: 10;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      
+    }
+
+    .dropdown-button {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e293b;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      text-align: left;
+      user-select: none;
+    }
+
+    .dropdown-button:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    .dropdown-content {
+  display: none;
+  font: georgia, serif;
+  position: absolute;
+  top: 50px;
+left: -3rem; /* Changed from -40px to 0 for better alignment with button */
+  width: auto; /* Changed from 100vw to auto */
+  min-width: 300px; /* Added a minimum width */
+  max-width: 350px; /* Set a max-width to prevent it from going edge-to-edge */
+  background-color: #f1f5f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 14px 14px;
+  z-index: 20;
+  padding: 1rem 1.5rem; /* Adjusted padding for better spacing */
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  background-color: rgba(241, 245, 249, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+    .dropdown-content a:hover,
+.dropdown-content a:focus {
+  color: #3b82f6;
+  letter-spacing: 0.5px;
+  transform: translateX(4px);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+header-content-wrapper {
+  backdrop-filter: blur(6px);
+  background-color: rgba(30, 41, 59, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhance nav hover look */
+.dropdown-button {
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+
+/* Sharpen subtitle with slight neon opacity */
+.subtitle {
+  text-shadow: 0 0 6px rgba(100, 149, 237, 0.25);
+}
+
+/* Smoother shimmer effect */
+.shimmer-text {
+  background-size: 300% 100%;
+  animation: shimmer 4.5s infinite ease-in-out;
+}
+
+/* Card box upgrade */
+.content-box {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 10px rgba(100, 149, 237, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.content-box:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12), 0 0 14px rgba(100, 149, 237, 0.2);
+}
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 0;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #1e293b;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content a:focus {
+      color: #3b82f6;
+      outline: none;
+    }
+
+    .dropdown.show .dropdown-content {
+      display: block;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      flex-grow: 1;
+  font-family: 'Inter', sans-serif;
+}
+
+    
+
+    h2 {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #334155;
+      margin-top: 3rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.015em;
+      border-left: 4px solid #94a3b8;
+      padding-left: 1.5rem;
+      width: calc(100vw - 30px);
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: calc(-50vw + 15px);
+      padding-right: 0;
+      box-sizing: border-box;
+  
+    }
+    p {
+   /* Change to any font you want */
+  font-size: 16px;              /* Optional: change size */
+  line-height: 1.6;             /* Optional: spacing between lines */
+}
+p.fadeable {
+  
+  font-size: 20.5px;
+}
+
+
+    .content-box {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      margin-bottom: 3.5rem;
+      
+
+      width: calc(100vw - 30px);
+      max-width: 100vw;
+      position: relative;
+      left: 50%;
+      margin-left: calc(-50vw + 15px);
+      box-sizing: border-box;
+    }
+
+    .content-box p {
+      margin-bottom: 1.5rem;
+    }
+
+    .content-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    footer {
+      background-color: #1e293b;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.light-blue-box {
+  background-color: rgba(100, 149, 237, 0.015); /* very subtle pale blue */
+  border-radius: 12px;
+  padding: 1.8rem 2.2rem;
+  margin-bottom: 2.5rem;
+
+  /* Border color: lighter blue than background */
+  border: 1px solid rgba(100, 149, 237, 0.06);
+  
+  /* Optional faint shadow for slight depth */
+  box-shadow: 0 4px 12px rgba(100, 149, 237, 0.03);
+}
+
+
+
+.light-blue-box p {
+  margin-bottom: 1.3rem;
+}
+.light-blue-box p:last-child {
+  margin-bottom: 0;
+}
+
+    .header-title {
+      font-family: 'Inter', sans-serif;
+    }
+    .shimmer-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      background: linear-gradient(90deg, #bbbbbb 25%, #ffffff 50%, #bbbbbb 75%);
+      background-size: 200% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: shimmer 6.5s infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    .header-sans {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-decor" aria-hidden="true">
+      <div class="shape-line shape-line-1"></div>
+      <div class="shape-line shape-line-2"></div>
+      <div class="shape-line shape-line-3"></div>
+      <div class="shape-line shape-line-13"></div>
+      <div class="shape-line shape-line-14"></div>
+      <div class="shape-line shape-line-4"></div>
+      <div class="shape-line shape-line-5"></div>
+      <div class="shape-line shape-line-6"></div>
+      <div class="shape-line shape-line-7"></div>
+      <div class="shape-line shape-line-8"></div>
+      <div class="shape-line shape-line-9"></div>
+      <div class="shape-line shape-line-10"></div>
+      <div class="shape-line shape-line-11"></div>
+      <div class="shape-line shape-line-12"></div>
+      <div class="shape-line shape-line-center"></div>
+    </div>
+
+    <div class="header-content-wrapper">
+      <div class="header-content" id="header-content">
+        <span class="header-logo-wrapper">
+          <img src="logo.png" alt="NewClear Logo" class="header-logo" />
+        </span>
+        <div>
+          <div class="header-title">
+            <h1>Nuclear Energy</h1>
+            <p class="subtitle shimmer-text">Powering the Future of Humanity</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+  <div class="dropdown" id="mainDropdown">
+    <button id="mainDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button">
+      Menu
+    </button>
+    <div class="dropdown-content" id="mainDropdownContent" role="menu" aria-label="Primary Navigation" style="display:none;">
+        <a href="index.html" role="menuitem" tabindex="0">Home</a>
+      
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+        <!-- Nuclear Energy dropdown -->
+        <div class="dropdown nested-dropdown" style="position: relative;">
+          <button id="nuclearDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button"
+            style="display: flex; align-items: center; gap: 6px; padding: 0; height: 2.5rem; line-height: 2.5rem;">
+            <span id="nuclearDropdownArrow">▶</span> Nuclear Energy
+          </button>
+          <div id="nuclearDropdownContent" role="menu" aria-label="Nuclear Energy Submenu"
+            style="display:none; margin-left: -25px; margin-top: 0.3rem; padding-left: 1.3em;">
+            <a href="WINE2.html" role="menuitem" tabindex="0">What is Nuclear Energy?</a>
+            <a href="TMWOFCNE.html" role="menuitem" tabindex="0">Main Ways of Creating Nuclear Energy</a>
+            <a href="TOWOCNE.html" role="menuitem" tabindex="0">Other Ways of Creating Nuclear Energy</a>
+            <a href="ETOE.html" role="menuitem" tabindex="0">Experimental Ways of Creating Nuclear Energy</a>
+          </div>
+        </div>
+
+        <!-- Nuclear Reactors dropdown -->
+        <div class="dropdown nested-dropdown" style="position: relative;">
+          <button id="reactorDropdownButton" aria-haspopup="true" aria-expanded="false" class="dropdown-button"
+            style="display: flex; align-items: center; gap: 1px; padding: 0; height: 2.5rem; line-height: 2.5rem;">
+            <span id="reactorDropdownArrow">▶</span> Nuclear Reactors
+          </button>
+          <div id="reactorDropdownContent" role="menu" aria-label="Nuclear Reactors Submenu"
+            style="display:none; margin-left: -25px; margin-top: 0.3rem; padding-left: 1.3em;">
+             <a href="HDARW.html" role="menuitem" tabindex="0">How Does a Nuclear Reactor Work?</a>
+            <a href="#" role="menuitem" tabindex="0">Fusion Reactors</a>
+            <a href="#" role="menuitem" tabindex="0">Breeder Reactors</a>
+            <a href="#" role="menuitem" tabindex="0">Experimental Reactors</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+  <main id="fade-in-content" style="opacity: 0; transition: opacity 2s ease;">
+    
+      <div class="header-line fadeable">
+        <h2 class="header-sans line-flex">
+  What is Nuclear Energy?
+  <span class="line-fill-inline"></span>
+</h2>
+
+      </div>
+      <div class="content-box fadeable">
+        <div class="light-blue-box">
+      <p class="fadeable">Nuclear energy is the extraordinary energy stored at the very core of every atom, within a tiny, incredibly dense region known as the nucleus. Atoms themselves are the fundamental building blocks of all matter throughout the universe. Everything we see, touch, or interact with to the air that surrounds us and the water flowing in rivers and oceans to the metals in buildings and even our own bodies; is composed of countless atoms arranged in different ways. Although atoms are unimaginably small, so small that even the most powerful microscopes cannot see their inner parts directly, their nuclei hold an immense amount of energy packed into an unbelievably tiny space. This energy remains hidden from everyday observation but underlies the vast potential stored within all matter. </p>
+        <p class="fadeable">The nucleus is composed of particles called protons and neutrons. Protons carry a positive electrical charge, while neutrons are electrically neutral, meaning they have no charge at all. These particles are packed extremely close together in the nucleus, despite the natural tendency of protons to repel each other because they share the same positive charge. What holds these particles tightly bound in such close proximity is the strong nuclear force, one of the four fundamental forces of nature. This force is unimaginably powerful, much stronger than the forces of gravity or electromagnetism that we experience daily, but it only acts across minuscule distances, roughly the size of the nucleus itself. Without this force, the nucleus would not hold together, and atoms as we know them would not exist.</p>
+      <p class="fadeable">The energy that keeps these protons and neutrons tightly bound together in the nucleus is called nuclear binding energy. This energy is not just theoretical or abstract; it represents one of the most concentrated forms of energy found in nature. It is vastly more powerful than the energy involved in typical chemical reactions, like the burning of wood or gasoline, which come from interactions between electrons orbiting atoms. Nuclear binding energy is millions of times more energetic per unit mass than chemical energy. This means that although the nucleus is tiny compared to the size of the entire atom, the energy it contains is staggering. It explains why nuclear reactions can release such huge amounts of power from relatively small amounts of material.</p>
+      
+      <button id="bindingDropdownBtn" class="fadeable" style="
+    background: none;
+  border: none;
+  color: black;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  "
+  aria-expanded="false"
+>
+  ▶ Show Binding Energy Model
+</button>
+</div>
+<div id="bindingModelContainer" class="fadeable" style="display: none; margin-top: 20px;">
+  <!-- ATOMO.html model starts here -->
+  <div id="container">
+    <div id="scene">
+      <div id="binding-line"></div>
+      <div id="explosion"></div>
+    </div>
+    <div id="description">Step 1: A stable atom contains protons, neutrons, and orbiting electrons.</div>
+    <div id="controls">
+      <button id="prevBtn" disabled>←</button>
+      <button id="nextBtn">→</button>
+      <button id="resetBtn">⟲</button>
+    </div>
+  </div>
+  <!-- Include entire <style> and <script> from ATOMO.html below -->
+  <style>
+    html, body {
+      margin: 0;
+      background: #fff;
+      color: #222;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+    }
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      max-width: 100%;
+      height: auto;
+      justify-content: center;
+      position: relative;
+    }
+    #scene {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      perspective: 1200px;
+      background: transparent;
+      box-sizing: border-box;
+      overflow: visible;
+    }
+    .sphere {
+      position: absolute;
+      border-radius: 50%;
+      transform-style: preserve-3d;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent 80%),
+        radial-gradient(circle at 50% 65%, var(--color-base) 50%, var(--color-dark) 95%);
+      box-shadow:
+        inset 0 30px 30px rgba(255,255,255,0.6),
+        inset 0 -15px 30px rgba(0,0,0,0.3);
+    }
+    .label {
+      position: absolute;
+      font-weight: bold;
+      text-shadow: 0 0 6px rgba(255,255,255,0.9);
+      font-size: 14px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    #description {
+      max-width: 600px;
+      margin: 8px 0 4px;
+      font-size: 1rem;
+      text-align: center;
+      min-height: 30px;
+      line-height: 1.3;
+    }
+    #controls {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 10px 0 0;
+    }
+    button {
+      background-color: #4a90e2;
+      border: none;
+      padding: 6px 14px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #aaa;
+      cursor: default;
+    }
+    #binding-line {
+      position: absolute;
+      background: linear-gradient(to bottom, rgba(255,0,0,0.7), transparent);
+      width: 4px;
+      border-radius: 2px;
+      transform-origin: top center;
+      pointer-events: none;
+      z-index: 2;
+    }
+    #explosion {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 0, 0, 0.6);
+      pointer-events: none;
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    @keyframes explodePulse {
+      0% { opacity: 0.8; width: 0; height: 0; }
+      50% { opacity: 0.3; width: 120px; height: 120px; }
+      100% { opacity: 0; width: 150px; height: 150px; }
+    }
+  </style>
+  <script>
+    const scene = document.getElementById('scene');
+    const description = document.getElementById('description');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const bindingLine = document.getElementById('binding-line');
+    const explosion = document.getElementById('explosion');
+
+    class Sphere3D {
+      constructor(name, baseColor, darkColor, size, label) {
+        this.el = document.createElement('div');
+        this.el.classList.add('sphere');
+        this.labelEl = document.createElement('div');
+        this.labelEl.classList.add('label');
+        this.labelEl.innerText = label;
+        scene.appendChild(this.el);
+        scene.appendChild(this.labelEl);
+        this.name = name;
+        this.size = size;
+        this.pos = {x: 0, y: 0, z: 0};
+        this.scale = 1;
+        this.visible = true;
+        this.el.style.setProperty('--color-base', baseColor);
+        this.el.style.setProperty('--color-dark', darkColor);
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+      }
+      setPosition(x, y, z) {
+        this.pos = {x, y, z};
+        this.update();
+      }
+      setScale(s) {
+        this.scale = s;
+        this.update();
+      }
+      update() {
+        if (!this.visible) {
+          this.el.style.display = 'none';
+          this.labelEl.style.display = 'none';
+          return;
+        }
+        const size = this.size * this.scale;
+        this.el.style.display = 'block';
+        this.labelEl.style.display = 'block';
+        this.el.style.width = size + 'px';
+        this.el.style.height = size + 'px';
+        this.el.style.transform = `translate3d(${this.pos.x - size/2}px, ${this.pos.y - size/2}px, ${this.pos.z}px) scale(${this.scale})`;
+        this.labelEl.style.transform = `translate3d(${this.pos.x}px, ${this.pos.y + size/2 + 20}px, ${this.pos.z}px)`;
+      }
+      hide() { this.visible = false; this.update(); }
+      show() { this.visible = true; this.update(); }
+    }
+
+    const centerX = 300;
+    const centerY = 300;
+
+    const proton = new Sphere3D('proton', '#e53935', '#8e0000', 100, 'Proton (+)');
+    const neutron = new Sphere3D('neutron', '#888', '#444', 100, 'Neutron');
+    const electron = new Sphere3D('electron', '#1e88e5', '#003c8f', 40, 'Electron');
+
+    const targets = [
+      {
+        proton: {x: centerX - 100, y: centerY, z: 0, s: 0.7},
+        neutron: {x: centerX + 100, y: centerY, z: 0, s: 0.7},
+        electron: {x: centerX, y: centerY - 180, z: 0, s: 1},
+        showBinding: false
+      },
+      {
+        proton: {x: centerX - 60, y: centerY - 60, z: 0, s: 1},
+        neutron: {x: centerX + 60, y: centerY + 60, z: 0, s: 1},
+        electron: null,
+        showBinding: false
+      },
+      {
+        proton: {x: centerX - 80, y: centerY - 50, z: 0, s: 1.05},
+        neutron: {x: centerX + 80, y: centerY + 50, z: 0, s: 1.05},
+        electron: null,
+        showBinding: true
+      },
+      {
+        proton: {x: centerX - 90, y: centerY - 40, z: 0, s: 1},
+        neutron: {x: centerX + 90, y: centerY + 40, z: 0, s: 1},
+        electron: null,
+        showBinding: true
+      },
+      {
+        proton: {x: centerX - 70, y: centerY - 70, z: 0, s: 1},
+        neutron: {x: centerX + 70, y: centerY + 70, z: 0, s: 1},
+        electron: null,
+        showBinding: false
+      }
+    ];
+
+    const descriptions = [
+      "Step 1: A stable atom contains protons, neutrons, and orbiting electrons.",
+      "Step 2: We zoom into the nucleus to view individual nucleons.",
+      "Step 3: Nuclear binding energy is the strong force holding them together.",
+      "Step 4: This force stabilizes the nucleus against repelling charges.",
+      "Step 5: Breaking that bond unleashes nuclear power."
+    ];
+
+    const current = {
+      proton: {x: centerX, y: centerY, z: 0, s: 1},
+      neutron: {x: centerX, y: centerY, z: 0, s: 1},
+      electron: {x: centerX, y: centerY, z: 0, s: 1}
+    };
+
+    let exploding = false;
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function updateBindingLine() {
+      if (!targets[state].showBinding) {
+        bindingLine.style.display = 'none';
+        return;
+      }
+      bindingLine.style.display = 'block';
+      const p = current.proton;
+      const n = current.neutron;
+      const dx = n.x - p.x;
+      const dy = n.y - p.y;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      bindingLine.style.width = length + 'px';
+      bindingLine.style.height = '4px';
+      bindingLine.style.left = p.x + 'px';
+      bindingLine.style.top = p.y + 'px';
+      bindingLine.style.transformOrigin = '0 50%';
+      bindingLine.style.transform = `rotate(${angle}deg)`;
+      explosion.style.left = (p.x + dx/2) + 'px';
+      explosion.style.top = (p.y + dy/2) + 'px';
+    }
+
+    function triggerExplosion() {
+      if (exploding) return;
+      exploding = true;
+      explosion.style.opacity = '0.8';
+      explosion.style.width = '0px';
+      explosion.style.height = '0px';
+      explosion.style.animation = 'explodePulse 1s ease-out forwards';
+      explosion.addEventListener('animationend', () => {
+        explosion.style.opacity = '0';
+        explosion.style.width = '0px';
+        explosion.style.height = '0px';
+        explosion.style.animation = '';
+        exploding = false;
+      }, {once: true});
+    }
+
+    function animate() {
+      const t = 0.1;
+      const target = targets[state];
+      ['proton', 'neutron', 'electron'].forEach(name => {
+        const obj = current[name];
+        const to = target[name];
+        if (!to) { eval(name).hide(); return; }
+        obj.x = lerp(obj.x, to.x, t);
+        obj.y = lerp(obj.y, to.y, t);
+        obj.z = lerp(obj.z || 0, to.z || 0, t);
+        obj.s = lerp(obj.s, to.s, t);
+        const sphere = eval(name);
+        sphere.show();
+        sphere.setPosition(obj.x, obj.y, obj.z);
+        sphere.setScale(obj.s);
+      });
+      updateBindingLine();
+      if (state === 4 && !exploding) triggerExplosion();
+      requestAnimationFrame(animate);
+    }
+
+    let state = 0;
+    function updateUI() {
+      description.innerText = descriptions[state];
+      prevBtn.disabled = state === 0;
+      nextBtn.disabled = state === targets.length - 1;
+    }
+    prevBtn.onclick = () => { if (state > 0) { state--; updateUI(); } };
+    nextBtn.onclick = () => { if (state < targets.length - 1) { state++; updateUI(); } };
+    resetBtn.onclick = () => { state = 0; updateUI(); };
+    updateUI(); animate();
+  </script>
+</div>
+<script>
+  // Toggle button to show/hide the binding energy model
+  const bindingBtn = document.getElementById('bindingDropdownBtn');
+  const bindingContainer = document.getElementById('bindingModelContainer');
+  bindingBtn.addEventListener('click', () => {
+    const isVisible = bindingContainer.style.display === 'block';
+    bindingContainer.style.display = isVisible ? 'none' : 'block';
+    bindingBtn.innerText = isVisible ? ' ▶ Show Binding Energy Model' : '▼ Hide Binding Energy Model';
+  });
+</script>
+      <div class="light-blue-box">
+       <p class="fadeable">One of the most fascinating aspects of nuclear energy is how it relates to the mass of particles inside the nucleus. According to the principles of physics, energy and mass are interchangeable, a revolutionary idea captured by the famous equation E=mc<sup>2</sup> formulated by Albert Einstein in the early 20th century. This equation tells us that even a tiny amount of mass can be converted into an enormous amount of energy because the speed of light squared (c<sup>2</sup>) is an extraordinarily large number. This explains why nuclear energy can release such immense power from an incredibly small change in mass during nuclear reactions. This profound connection between mass and energy reveals a hidden potential locked deep inside matter itself.</p>
+       <p class="fadeable">To put this into perspective, consider that just one gram of uraniumn (the radioactive fuel used in nuclear reactors) contains enough energy to generate the same amount of electricity as burning several tons of coal. This remarkable energy density makes nuclear energy one of the most efficient and powerful sources of energy available to humans. Because such a small amount of nuclear fuel can produce vast amounts of energy, nuclear power plants can operate with a much smaller physical footprint compared to traditional fossil fuel plants. This efficiency has made nuclear energy a critical part of the world’s energy mix, powering cities and industries while reducing reliance on limited natural resources.</p>
+       <p class="fadeable">Unlike chemical energy, which arises from the rearrangement of electrons in atoms during reactions like combustion, nuclear energy is stored within the nucleus itself, the very heart of the atom. This fundamental difference makes nuclear energy far more concentrated and powerful. It taps into the deepest and most potent forces of nature, the same forces that power the stars, including our Sun. The energy locked within the nucleus is responsible for many of the processes that govern the universe at its most fundamental level, from the creation of elements in stars to the incredible phenomena observed in astrophysics. Nuclear energy connects the smallest scales of matter to the vastest reaches of space.
+       <p class="fadeable"> Nuclear energy is a powerful reminder that even the tiniest components of our universe hold incredible forces. Hidden deep within the structure of matter lies a power so vast that it fuels the stars, drives the cycles of cosmic events, and supports many of the technologies that have transformed human life. To understand and harness nuclear energy is to connect with the very essence of the universe itself, a force woven into the fabric of existence, waiting to be discovered, respected, and wisely used. It invites us to marvel at the wonders hidden beneath the surface of the world around us and inspires a deeper appreciation for the profound mysteries of nature.</p>
+</p>
+</div>
+    </div>
+        
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Nuclear Energy Site — All Rights Reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  // Main dropdown toggle
+  const mainBtn = document.getElementById('mainDropdownButton');
+  const mainContent = document.getElementById('mainDropdownContent');
+
+  mainBtn.addEventListener('click', () => {
+    const expanded = mainBtn.getAttribute('aria-expanded') === 'true';
+    if (expanded) {
+      mainContent.style.display = 'none';
+      mainBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      mainContent.style.display = 'block';
+      mainBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Get all nested dropdown buttons and their content/arrows
+  const nestedDropdowns = [
+    {
+      button: document.getElementById('nuclearDropdownButton'),
+      content: document.getElementById('nuclearDropdownContent'),
+      arrow: document.getElementById('nuclearDropdownArrow')
+    },
+    {
+      button: document.getElementById('reactorDropdownButton'),
+      content: document.getElementById('reactorDropdownContent'),
+      arrow: document.getElementById('reactorDropdownArrow')
+    }
+    // IMPORTANT: If you add more nested dropdowns in the future, add them to this array!
+    /*
+    {
+      button: document.getElementById('yourNewDropdownButtonId'),
+      content: document.getElementById('yourNewDropdownContentId'),
+      arrow: document.getElementById('yourNewDropdownArrowId')
+    }
+    */
+  ];
+
+  nestedDropdowns.forEach(currentDropdown => {
+    currentDropdown.button.addEventListener('click', (event) => {
+      // Prevent the click from propagating to the window and closing everything
+      event.stopPropagation(); 
+
+      const isOpen = currentDropdown.button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other nested dropdowns
+      nestedDropdowns.forEach(otherDropdown => {
+        if (otherDropdown !== currentDropdown && otherDropdown.button.getAttribute('aria-expanded') === 'true') {
+          otherDropdown.content.style.display = 'none';
+          otherDropdown.arrow.textContent = '▶';
+          otherDropdown.button.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Toggle the current dropdown
+      if (isOpen) {
+        currentDropdown.content.style.display = 'none';
+        currentDropdown.arrow.textContent = '▶';
+        currentDropdown.button.setAttribute('aria-expanded', 'false');
+      } else {
+        currentDropdown.content.style.display = 'block';
+        currentDropdown.arrow.textContent = '▼';
+        currentDropdown.button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+
+  // Close dropdowns if clicking outside
+  window.addEventListener('click', (event) => {
+    const isClickInsideMain = mainBtn.contains(event.target) || mainContent.contains(event.target);
+    if (!isClickInsideMain) {
+      mainContent.style.display = 'none';
+      mainBtn.setAttribute('aria-expanded', 'false');
+
+      // Also close all nested dropdowns when clicking outside the main dropdown
+      nestedDropdowns.forEach(dropdown => {
+        dropdown.content.style.display = 'none';
+        dropdown.arrow.textContent = '▶';
+        dropdown.button.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // Existing animation and scroll logic (DO NOT REMOVE THESE)
+  const headerContent = document.getElementById('header-content');
+  const headerImage = document.querySelector('.header-logo');
+  const hasAnimatedHeader = sessionStorage.getItem('headerAnimated') === 'true';
+
+  const showHeader = () => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        headerContent.classList.add('visible');
+        sessionStorage.setItem('headerAnimated', 'true');
+      });
+    });
+  };
+
+  if (hasAnimatedHeader) {
+    headerContent.classList.add('visible');
+    headerContent.style.transition = 'none';
+  } else {
+    if (headerImage.complete) {
+      showHeader();
+    } else {
+      headerImage.addEventListener('load', showHeader);
+    }
+  }
+
+  const circles = document.querySelectorAll('.shape-line');
+  circles.forEach(circle => (circle.style.opacity = '0'));
+  circles.forEach((circle, index) => {
+    setTimeout(() => {
+      circle.style.opacity = '1';
+    }, index * 80);
+  });
+
+  const scrollElements = document.querySelectorAll('.scroll-animate');
+  const handleScrollAnimate = () => {
+    const windowBottom = window.innerHeight + window.pageYOffset;
+    scrollElements.forEach((el) => {
+      if (el.offsetTop < windowBottom - 100) {
+        el.classList.add('visible');
+      }
+    });
+  };
+  handleScrollAnimate();
+  window.addEventListener('scroll', handleScrollAnimate);
+
+  // Removed the old 'dropdown' and 'dropdownButton' logic as it's replaced by mainBtn/mainContent
+  // const dropdown = document.getElementById('dropdown');
+  // const dropdownButton = document.getElementById('dropdownButton');
+  // dropdownButton.addEventListener('click', () => { ... });
+  // window.addEventListener('click', (event) => { ... });
+
+  // Navigation link fade-out
+  const links = document.querySelectorAll('a[href]');
+  const fadeables = document.querySelectorAll('.fadeable');
+  const allCircles = document.querySelectorAll('.shape-line');
+  const allH2 = document.querySelectorAll('h2');
+  const allParagraphs = Array.from(document.querySelectorAll('p')).filter(p => !p.classList.contains('subtitle'));
+  const fadeTargets = [...allCircles, ...allH2, ...allParagraphs];
+
+  links.forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (!href || href.startsWith('#') || href === window.location.pathname) return;
+      e.preventDefault();
+      fadeTargets.forEach(el => {
+        el.style.transition = 'opacity 0.7s ease';
+        el.style.opacity = '0';
+      });
+      setTimeout(() => {
+        window.location.href = href;
+      }, 700);
+    });
+  });
+
+  // Fade-in effect for the main content
+  const fadeInContent = document.getElementById('fade-in-content');
+  setTimeout(() => {
+    fadeInContent.style.opacity = '1';
+  }, 50);
+
+  // Scroll animation for elements (duplicate, keeping the one that was more complete)
+  // const scrollElements = document.querySelectorAll('.scroll-animate'); // Already defined above
+
+  const elementInView = (el, offset = 100) => {
+    const elementTop = el.getBoundingClientRect().top;
+    return elementTop <= (window.innerHeight || document.documentElement.clientHeight) - offset;
+  };
+
+  const displayScrollElement = (element) => {
+    element.classList.add('visible');
+  };
+
+  const handleScrollAnimation = () => { // Already defined above, consolidating logic
+    scrollElements.forEach(el => {
+      if (elementInView(el, 100)) {
+        displayScrollElement(el);
+      }
+    });
+  };
+
+  // Ensure scroll event listener is only added once if consolidating
+  // window.addEventListener('scroll', handleScrollAnimation); // Already added above
+  // handleScrollAnimation(); // Already called above
+});
+
+</script>
+</body>
+</html>
